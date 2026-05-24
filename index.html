@@ -1,0 +1,1676 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Amadou Maiga — Développeur Web Full-Stack basé à Bamako, Mali.">
+  <title>Amadou Maiga · Développeur Web</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    /* ===========================
+       CSS VARIABLES & RESET
+    =========================== */
+    :root {
+      --bg:        #0C0D10;
+      --bg2:       #111318;
+      --bg3:       #181B22;
+      --border:    rgba(255,255,255,0.07);
+      --gold:      #E8A838;
+      --gold2:     #F5C76A;
+      --white:     #F0EDE8;
+      --muted:     #8A8F9E;
+      --radius:    20px;
+      --font-head: 'Syne', sans-serif;
+      --font-body: 'DM Sans', sans-serif;
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
+
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    section { padding: 110px 0; }
+
+    /* ===========================
+       NOISE TEXTURE OVERLAY
+    =========================== */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* ===========================
+       NAVBAR
+    =========================== */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 0 28px;
+      backdrop-filter: blur(20px);
+      background: rgba(12,13,16,0.85);
+      border-bottom: 1px solid var(--border);
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--font-head);
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-logo span { color: var(--gold); }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2.2rem;
+    }
+
+    .nav-links a {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--muted);
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 2px;
+      background: var(--gold);
+      border-radius: 2px;
+      transition: width 0.3s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--white);
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after { width: 100%; }
+
+    .nav-cta {
+      background: var(--gold);
+      color: #0C0D10 !important;
+      font-weight: 700 !important;
+      padding: 9px 22px;
+      border-radius: 40px;
+      font-size: 0.88rem !important;
+      transition: transform 0.2s, box-shadow 0.2s !important;
+    }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(232,168,56,0.35);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+    .hamburger span {
+      width: 24px; height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+
+    /* ===========================
+       HERO
+    =========================== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 70px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Radial glow background */
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(232,168,56,0.12) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 440px;
+      gap: 60px;
+      align-items: center;
+      width: 100%;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(232,168,56,0.1);
+      border: 1px solid rgba(232,168,56,0.25);
+      padding: 6px 16px;
+      border-radius: 40px;
+      font-size: 0.82rem;
+      color: var(--gold);
+      font-weight: 500;
+      margin-bottom: 24px;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-tag i { font-size: 0.75rem; }
+
+    .hero h1 {
+      font-family: var(--font-head);
+      font-size: clamp(2.8rem, 5vw, 4.4rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -1.5px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--gold);
+    }
+
+    .hero-desc {
+      color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.7;
+      max-width: 520px;
+      margin-bottom: 40px;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: #0C0D10;
+      font-weight: 700;
+      font-family: var(--font-head);
+      padding: 14px 32px;
+      border-radius: 40px;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(232,168,56,0.4);
+    }
+
+    .btn-ghost {
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--white);
+      font-weight: 500;
+      font-family: var(--font-body);
+      padding: 14px 32px;
+      border-radius: 40px;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      transition: border-color 0.2s, background 0.2s;
+      cursor: pointer;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--gold);
+      background: rgba(232,168,56,0.06);
+    }
+
+    /* Hero stats */
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      margin-top: 50px;
+    }
+
+    .stat-num {
+      font-family: var(--font-head);
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 5px;
+    }
+
+    /* Hero Photo */
+    .hero-photo-wrap {
+      position: relative;
+    }
+
+    .hero-photo-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      background: linear-gradient(135deg, var(--gold), transparent 60%);
+      border-radius: 32px;
+      z-index: 0;
+    }
+
+    .hero-photo-wrap img {
+      width: 100%;
+      height: 560px;
+      object-fit: cover;
+      object-position: top center;
+      border-radius: 30px;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge-float {
+      position: absolute;
+      bottom: 28px;
+      left: -24px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      z-index: 2;
+      backdrop-filter: blur(10px);
+    }
+
+    .badge-icon {
+      width: 44px; height: 44px;
+      background: rgba(232,168,56,0.15);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      color: var(--gold);
+    }
+
+    .badge-text strong {
+      font-family: var(--font-head);
+      font-size: 1.1rem;
+      display: block;
+    }
+
+    .badge-text span {
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    /* ===========================
+       SECTION HEADER
+    =========================== */
+    .sec-label {
+      color: var(--gold);
+      font-family: var(--font-head);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .sec-title {
+      font-family: var(--font-head);
+      font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1.15;
+    }
+
+    .sec-header {
+      margin-bottom: 60px;
+    }
+
+    /* ===========================
+       ABOUT
+    =========================== */
+    #about { background: var(--bg2); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      align-items: center;
+    }
+
+    .about-text p {
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 20px;
+      font-size: 1.02rem;
+    }
+
+    .about-checks {
+      margin: 30px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.95rem;
+    }
+
+    .check-item i {
+      color: var(--gold);
+      font-size: 0.9rem;
+    }
+
+    .about-aside {
+      background: var(--bg3);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 36px 32px;
+    }
+
+    .about-aside h3 {
+      font-family: var(--font-head);
+      font-size: 1.2rem;
+      margin-bottom: 24px;
+    }
+
+    .skill-bar-item {
+      margin-bottom: 20px;
+    }
+
+    .skill-bar-top {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.88rem;
+      margin-bottom: 8px;
+    }
+
+    .skill-bar-top span:last-child { color: var(--gold); font-weight: 600; }
+
+    .skill-bar-bg {
+      height: 6px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .skill-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold), var(--gold2));
+      border-radius: 10px;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .skill-bar-fill.animated { transform: scaleX(1); }
+
+    /* ===========================
+       SERVICES
+    =========================== */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .srv-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      transition: border-color 0.3s, transform 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .srv-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .srv-card:hover {
+      border-color: rgba(232,168,56,0.3);
+      transform: translateY(-6px);
+    }
+
+    .srv-card:hover::before { opacity: 1; }
+
+    .srv-icon {
+      width: 56px; height: 56px;
+      background: rgba(232,168,56,0.1);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--gold);
+      margin-bottom: 24px;
+    }
+
+    .srv-card h3 {
+      font-family: var(--font-head);
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+    }
+
+    .srv-card p {
+      color: var(--muted);
+      font-size: 0.93rem;
+      line-height: 1.6;
+    }
+
+    /* ===========================
+       EXPERIENCE
+    =========================== */
+    #experience { background: var(--bg2); }
+
+    .exp-timeline {
+      position: relative;
+      padding-left: 30px;
+    }
+
+    .exp-timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 8px; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+    }
+
+    .exp-item {
+      position: relative;
+      margin-bottom: 40px;
+      padding-left: 36px;
+    }
+
+    .exp-item::before {
+      content: '';
+      position: absolute;
+      left: -35px; top: 8px;
+      width: 12px; height: 12px;
+      background: var(--gold);
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px rgba(232,168,56,0.15);
+    }
+
+    .exp-date {
+      font-size: 0.8rem;
+      color: var(--gold);
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .exp-item h3 {
+      font-family: var(--font-head);
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+    }
+
+    .exp-company {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+
+    .exp-item ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .exp-item ul li {
+      font-size: 0.9rem;
+      color: var(--muted);
+      display: flex;
+      gap: 8px;
+    }
+
+    .exp-item ul li::before {
+      content: '→';
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* ===========================
+       SKILLS
+    =========================== */
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      gap: 18px;
+    }
+
+    .tech-item {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px 12px 18px;
+      text-align: center;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+
+    .tech-item:hover {
+      border-color: rgba(232,168,56,0.4);
+      transform: translateY(-5px);
+    }
+
+    .tech-item i {
+      font-size: 2.2rem;
+      color: var(--gold);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .tech-item span {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    /* ===========================
+       PROJECTS
+    =========================== */
+    #projects { background: var(--bg2); }
+
+    .proj-filter {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 44px;
+    }
+
+    .proj-filter button {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 8px 22px;
+      border-radius: 40px;
+      font-size: 0.88rem;
+      cursor: pointer;
+      font-family: var(--font-body);
+      transition: 0.2s;
+    }
+
+    .proj-filter button.active,
+    .proj-filter button:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: #0C0D10;
+      font-weight: 700;
+    }
+
+    .proj-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 24px;
+    }
+
+    .proj-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .proj-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(232,168,56,0.3);
+    }
+
+    .proj-thumb {
+      height: 200px;
+      background: var(--bg3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .proj-thumb-icon {
+      font-size: 4rem;
+      color: rgba(232,168,56,0.25);
+      transition: transform 0.4s;
+    }
+
+    .proj-card:hover .proj-thumb-icon {
+      transform: scale(1.15);
+    }
+
+    .proj-cat-badge {
+      position: absolute;
+      top: 14px; right: 14px;
+      background: rgba(232,168,56,0.15);
+      border: 1px solid rgba(232,168,56,0.3);
+      color: var(--gold);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 40px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .proj-body {
+      padding: 24px;
+    }
+
+    .proj-body h3 {
+      font-family: var(--font-head);
+      font-size: 1.15rem;
+      margin-bottom: 8px;
+    }
+
+    .proj-body p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .proj-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .proj-tag {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      padding: 3px 12px;
+      border-radius: 40px;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    /* ===========================
+       TESTIMONIALS
+    =========================== */
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .testi-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 28px;
+    }
+
+    .testi-stars {
+      color: var(--gold);
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+
+    .testi-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+
+    .testi-author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .testi-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), #c47f10);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-head);
+      font-weight: 800;
+      color: #0C0D10;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .testi-name {
+      font-family: var(--font-head);
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .testi-role {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* ===========================
+       CONTACT
+    =========================== */
+    #contact { background: var(--bg); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 50px;
+    }
+
+    .contact-aside h3 {
+      font-family: var(--font-head);
+      font-size: 1.6rem;
+      margin-bottom: 16px;
+    }
+
+    .contact-aside p {
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 36px;
+      font-size: 0.95rem;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .cl-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .cl-icon {
+      width: 48px; height: 48px;
+      background: rgba(232,168,56,0.1);
+      border: 1px solid rgba(232,168,56,0.2);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: var(--gold);
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+
+    .cl-item:hover .cl-icon {
+      background: rgba(232,168,56,0.2);
+    }
+
+    .cl-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .cl-value {
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    /* Socials */
+    .social-row {
+      display: flex;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .social-btn {
+      width: 42px; height: 42px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 1rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .social-btn:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* Form */
+    .contact-form {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      padding: 40px 36px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px 18px;
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      transition: border-color 0.2s;
+      resize: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--gold);
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: #3E434F;
+    }
+
+    /* ===========================
+       WHATSAPP FLOAT
+    =========================== */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      z-index: 500;
+      width: 58px; height: 58px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.7rem;
+      color: white;
+      box-shadow: 0 8px 30px rgba(37,211,102,0.45);
+      transition: transform 0.25s, box-shadow 0.25s;
+      animation: pulse-wa 2.5s infinite;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.12);
+      box-shadow: 0 12px 40px rgba(37,211,102,0.6);
+    }
+
+    @keyframes pulse-wa {
+      0%, 100% { box-shadow: 0 8px 30px rgba(37,211,102,0.45); }
+      50% { box-shadow: 0 8px 40px rgba(37,211,102,0.7), 0 0 0 10px rgba(37,211,102,0.08); }
+    }
+
+    /* ===========================
+       FOOTER
+    =========================== */
+    footer {
+      background: #07080B;
+      border-top: 1px solid var(--border);
+      padding: 40px 28px;
+      text-align: center;
+    }
+
+    footer p {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    footer strong { color: var(--gold); }
+
+    /* ===========================
+       DIVIDER
+    =========================== */
+    .divider {
+      width: 60px; height: 3px;
+      background: var(--gold);
+      border-radius: 3px;
+      margin: 16px 0 0;
+    }
+
+    /* ===========================
+       ANIMATIONS
+    =========================== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* stagger children */
+    .fade-up:nth-child(2) { transition-delay: 0.1s; }
+    .fade-up:nth-child(3) { transition-delay: 0.2s; }
+    .fade-up:nth-child(4) { transition-delay: 0.3s; }
+
+    /* ===========================
+       RESPONSIVE
+    =========================== */
+    @media (max-width: 1000px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-photo-wrap { display: none; }
+      .about-grid { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      section { padding: 80px 0; }
+      .nav-links { display: none; }
+      .nav-links.open {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 70px; left: 0; right: 0;
+        background: rgba(12,13,16,0.97);
+        padding: 30px 28px;
+        gap: 1.5rem;
+        border-bottom: 1px solid var(--border);
+        backdrop-filter: blur(20px);
+      }
+      .hamburger { display: flex; }
+      .nav-cta { display: none; }
+      .services-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 2.4rem; }
+      .hero-stats { gap: 24px; }
+      .proj-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- WhatsApp Float Button -->
+<a class="whatsapp-float" href="https://wa.me/22353417919" target="_blank" rel="noopener noreferrer" title="Contactez-moi sur WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+<!-- ======================== NAVBAR ======================== -->
+<nav class="navbar" id="navbar">
+  <div class="nav-logo">Amadou<span>.</span></div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#hero" class="nav-link">Accueil</a></li>
+    <li><a href="#about" class="nav-link">À propos</a></li>
+    <li><a href="#services" class="nav-link">Services</a></li>
+    <li><a href="#experience" class="nav-link">Expérience</a></li>
+    <li><a href="#projects" class="nav-link">Projets</a></li>
+    <li><a href="#contact" class="nav-link">Contact</a></li>
+    <li><a href="https://wa.me/22353417919" target="_blank" class="nav-cta"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ======================== HERO ======================== -->
+<section id="hero" class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <span class="hero-tag"><i class="fas fa-map-marker-alt"></i> Bamako, Mali · Disponible</span>
+        <h1>Développeur<br><em>Full-Stack</em><br>& Créatif</h1>
+        <p class="hero-desc">
+          Je m'appelle <strong>Amadou Maiga</strong>. Je transforme vos idées en expériences digitales modernes — sites web, applications et solutions sur mesure.
+        </p>
+        <div class="hero-btns">
+          <a href="#projects" class="btn-gold"><i class="fas fa-eye"></i> Voir mes projets</a>
+          <a href="assets/cv.pdf" download="CV_Amadou_Maiga.pdf" class="btn-ghost"><i class="fas fa-download"></i> Télécharger CV</a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="stat-num">3+</div>
+            <div class="stat-label">Ans d'expérience</div>
+          </div>
+          <div>
+            <div class="stat-num">15+</div>
+            <div class="stat-label">Projets livrés</div>
+          </div>
+          <div>
+            <div class="stat-num">100%</div>
+            <div class="stat-label">Clients satisfaits</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-photo-wrap fade-up">
+        <img src="assets/amadou.jpg" alt="Amadou Maiga — Développeur Web">
+        <div class="hero-badge-float">
+          <div class="badge-icon"><i class="fas fa-code"></i></div>
+          <div class="badge-text">
+            <strong>Full-Stack Dev</strong>
+            <span>Angular · Laravel · WordPress</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== ABOUT ======================== -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text fade-up">
+        <span class="sec-label">À propos</span>
+        <h2 class="sec-title">Passion, code<br>& innovation</h2>
+        <div class="divider"></div>
+        <br>
+        <p>
+          Développeur web passionné avec une formation en informatique et télécommunications, je possède plusieurs expériences dans le développement d'applications web, la gestion des réseaux et la transformation digitale.
+        </p>
+        <p>
+          Mon approche allie design centré sur l'utilisateur et performance technique pour livrer des solutions qui font vraiment la différence.
+        </p>
+        <div class="about-checks">
+          <div class="check-item"><i class="fas fa-circle-check"></i> Disponible pour freelance &amp; missions</div>
+          <div class="check-item"><i class="fas fa-circle-check"></i> +15 projets livrés avec succès</div>
+          <div class="check-item"><i class="fas fa-circle-check"></i> Stack moderne : Angular, Laravel, WordPress, Spring</div>
+          <div class="check-item"><i class="fas fa-circle-check"></i> Maîtrise de la gestion de réseaux</div>
+        </div>
+        <a href="assets/cv.pdf" download="CV_Amadou_Maiga.pdf" class="btn-gold" style="margin-top:10px;">
+          <i class="fas fa-download"></i> Télécharger mon CV
+        </a>
+      </div>
+      <div class="about-aside fade-up">
+        <h3>Compétences clés</h3>
+        <div class="skill-bar-item">
+          <div class="skill-bar-top"><span>WordPress</span><span>95%</span></div>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:0.95"></div></div>
+        </div>
+        <div class="skill-bar-item">
+          <div class="skill-bar-top"><span>HTML5 / CSS3</span><span>90%</span></div>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:0.90"></div></div>
+        </div>
+        <div class="skill-bar-item">
+          <div class="skill-bar-top"><span>Angular</span><span>85%</span></div>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:0.85"></div></div>
+        </div>
+        <div class="skill-bar-item">
+          <div class="skill-bar-top"><span>JavaScript</span><span>85%</span></div>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:0.85"></div></div>
+        </div>
+        <div class="skill-bar-item">
+          <div class="skill-bar-top"><span>PHP / Laravel</span><span>75%</span></div>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:0.75"></div></div>
+        </div>
+        <div class="skill-bar-item">
+          <div class="skill-bar-top"><span>Figma</span><span>80%</span></div>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:0.80"></div></div>
+        </div>
+        <div class="skill-bar-item">
+          <div class="skill-bar-top"><span>MySQL</span><span>80%</span></div>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:0.80"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== SERVICES ======================== -->
+<section id="services">
+  <div class="container">
+    <div class="sec-header fade-up">
+      <span class="sec-label">Ce que je fais</span>
+      <h2 class="sec-title">Services proposés</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="services-grid">
+      <div class="srv-card fade-up">
+        <div class="srv-icon"><i class="fas fa-palette"></i></div>
+        <h3>Identité de marque</h3>
+        <p>Création de logos, chartes graphiques et supports visuels uniques pour vous démarquer de la concurrence.</p>
+      </div>
+      <div class="srv-card fade-up">
+        <div class="srv-icon"><i class="fas fa-laptop-code"></i></div>
+        <h3>Sites web modernes</h3>
+        <p>Sites responsive, rapides et optimisés SEO, développés sur mesure ou avec CMS (WordPress).</p>
+      </div>
+      <div class="srv-card fade-up">
+        <div class="srv-icon"><i class="fas fa-layer-group"></i></div>
+        <h3>Applications web</h3>
+        <p>Applications intuitives, dashboards et solutions métier avec une expérience utilisateur fluide.</p>
+      </div>
+      <div class="srv-card fade-up">
+        <div class="srv-icon"><i class="fas fa-store"></i></div>
+        <h3>Gestion de boutique</h3>
+        <p>Systèmes complets de gestion de stock, ventes, clients et facturation pour commerces et boutiques.</p>
+      </div>
+      <div class="srv-card fade-up">
+        <div class="srv-icon"><i class="fas fa-network-wired"></i></div>
+        <h3>Réseaux & Infra</h3>
+        <p>Gestion de réseaux informatiques, sécurité des systèmes et transformation digitale d'entreprises.</p>
+      </div>
+      <div class="srv-card fade-up">
+        <div class="srv-icon"><i class="fas fa-mobile-screen"></i></div>
+        <h3>Applications mobiles</h3>
+        <p>Développement d'applications mobiles cross-platform avec Ionic pour iOS et Android.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== EXPERIENCE ======================== -->
+<section id="experience">
+  <div class="container">
+    <div class="sec-header fade-up">
+      <span class="sec-label">Parcours</span>
+      <h2 class="sec-title">Expérience &amp;<br>Formation</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="exp-timeline">
+      <div class="exp-item fade-up">
+        <div class="exp-date">Nov 2023 — Sep 2024</div>
+        <h3>Développeur Web &amp; Mobile</h3>
+        <div class="exp-company">Africant Development — ACI 2000, Bamako</div>
+        <ul>
+          <li>Création de sites web et applications web sur mesure</li>
+          <li>Transformation digitale et gestion des réseaux sociaux</li>
+          <li>Angular, Ionic, Symfony, Laravel</li>
+          <li>Gestion de la sécurité des applications et des systèmes</li>
+        </ul>
+      </div>
+      <div class="exp-item fade-up">
+        <div class="exp-date">Oct 2022 — Août 2023</div>
+        <h3>Développeur Web</h3>
+        <div class="exp-company">Wagadou Soft — Boulkasoumbougou</div>
+        <ul>
+          <li>Développement front-end (HTML, CSS) et back-end (PHP, Laravel, WordPress)</li>
+          <li>Gestion des réseaux et des serveurs</li>
+          <li>Solutions web sur mesure pour des clients variés</li>
+        </ul>
+      </div>
+      <div class="exp-item fade-up">
+        <div class="exp-date">Avril 2021</div>
+        <h3>Stagiaire Développeur Web</h3>
+        <div class="exp-company">Global Business Technology — Boulkasoumbougou</div>
+        <ul>
+          <li>Développement web et gestion de réseaux</li>
+          <li>Création de sites web et infrastructure réseau</li>
+        </ul>
+      </div>
+      <div class="exp-item fade-up">
+        <div class="exp-date">Jan 2021 — Sep 2023</div>
+        <h3>Licence en Informatique &amp; Télécommunications</h3>
+        <div class="exp-company">Université ERPIE — Bamako</div>
+        <ul>
+          <li>Spécialisation développement web &amp; réseaux</li>
+          <li>Formation sur les technologies modernes du web</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== SKILLS ======================== -->
+<section id="skills">
+  <div class="container">
+    <div class="sec-header fade-up">
+      <span class="sec-label">Expertise technique</span>
+      <h2 class="sec-title">Stack &amp; Technologies</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="tech-grid">
+      <div class="tech-item fade-up"><i class="fab fa-html5"></i><span>HTML5</span></div>
+      <div class="tech-item fade-up"><i class="fab fa-css3-alt"></i><span>CSS3</span></div>
+      <div class="tech-item fade-up"><i class="fab fa-js"></i><span>JavaScript</span></div>
+      <div class="tech-item fade-up"><i class="fab fa-angular"></i><span>Angular</span></div>
+      <div class="tech-item fade-up"><i class="fab fa-react"></i><span>React</span></div>
+      <div class="tech-item fade-up"><i class="fab fa-php"></i><span>PHP</span></div>
+      <div class="tech-item fade-up"><i class="fab fa-laravel"></i><span>Laravel</span></div>
+      <div class="tech-item fade-up"><i class="fab fa-symfony"></i><span>Symfony</span></div>
+      <div class="tech-item fade-up"><i class="fab fa-wordpress"></i><span>WordPress</span></div>
+      <div class="tech-item fade-up"><i class="fab fa-node-js"></i><span>Node.js</span></div>
+      <div class="tech-item fade-up"><i class="fas fa-database"></i><span>MySQL</span></div>
+      <div class="tech-item fade-up"><i class="fab fa-git-alt"></i><span>Git</span></div>
+      <div class="tech-item fade-up"><i class="fab fa-figma"></i><span>Figma</span></div>
+      <div class="tech-item fade-up"><i class="fab fa-bootstrap"></i><span>Bootstrap</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== PROJECTS ======================== -->
+<section id="projects">
+  <div class="container">
+    <div class="sec-header fade-up">
+      <span class="sec-label">Réalisations</span>
+      <h2 class="sec-title">Projets récents</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="proj-filter fade-up" id="filterBtns">
+      <button class="active" data-f="all">Tous</button>
+      <button data-f="web">Sites web</button>
+      <button data-f="app">Applications</button>
+      <button data-f="gestion">Gestion</button>
+    </div>
+    <div class="proj-grid" id="projGrid"></div>
+  </div>
+</section>
+
+<!-- ======================== TESTIMONIALS ======================== -->
+<section id="testimonials" style="background: var(--bg);">
+  <div class="container">
+    <div class="sec-header fade-up" style="text-align:center;">
+      <span class="sec-label">Témoignages</span>
+      <h2 class="sec-title">Ce que disent mes clients</h2>
+      <div class="divider" style="margin:16px auto 0;"></div>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card fade-up">
+        <div class="testi-stars">★★★★★</div>
+        <p>"Amadou a donné vie à mon projet avec une créativité rare. Site rapide, design élégant — un vrai partenaire digital !"</p>
+        <div class="testi-author">
+          <div class="testi-avatar">AD</div>
+          <div>
+            <div class="testi-name">Aminata Diallo</div>
+            <div class="testi-role">CEO — Bright Future</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card fade-up">
+        <div class="testi-stars">★★★★★</div>
+        <p>"Une écoute parfaite et des livraisons dans les délais. Je recommande pour tout projet digital professionnel."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">MT</div>
+          <div>
+            <div class="testi-name">Mamadou Traoré</div>
+            <div class="testi-role">Fondateur — Avit Web</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card fade-up">
+        <div class="testi-stars">★★★★★</div>
+        <p>"Application de gestion de boutique intuitive — mon commerce a gagné énormément en efficacité. Merci Amadou !"</p>
+        <div class="testi-author">
+          <div class="testi-avatar">FC</div>
+          <div>
+            <div class="testi-name">Fatoumata Cissé</div>
+            <div class="testi-role">Directrice — Groupe AWD</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card fade-up">
+        <div class="testi-stars">★★★★★</div>
+        <p>"Un professionnalisme exemplaire. Le système de gestion de pharmacie est robuste et facile à utiliser au quotidien."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">IK</div>
+          <div>
+            <div class="testi-name">Ibrahim Keïta</div>
+            <div class="testi-role">Pharmacien — Bamako</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== CONTACT ======================== -->
+<section id="contact">
+  <div class="container">
+    <div class="sec-header fade-up">
+      <span class="sec-label">Contact</span>
+      <h2 class="sec-title">Travaillons ensemble</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-aside fade-up">
+        <h3>Parlons de votre projet !</h3>
+        <p>Disponible pour des missions freelance, des collaborations et des projets en entreprise. N'hésitez pas à me contacter.</p>
+        <div class="contact-links">
+          <a class="cl-item" href="mailto:doumaiga3@gmail.com">
+            <div class="cl-icon"><i class="fas fa-envelope"></i></div>
+            <div>
+              <div class="cl-label">Email</div>
+              <div class="cl-value">doumaiga3@gmail.com</div>
+            </div>
+          </a>
+          <a class="cl-item" href="tel:+22391613489">
+            <div class="cl-icon"><i class="fas fa-phone"></i></div>
+            <div>
+              <div class="cl-label">Téléphone</div>
+              <div class="cl-value">+223 91 61 34 89</div>
+            </div>
+          </a>
+          <a class="cl-item" href="https://wa.me/22353417919" target="_blank">
+            <div class="cl-icon"><i class="fab fa-whatsapp"></i></div>
+            <div>
+              <div class="cl-label">WhatsApp</div>
+              <div class="cl-value">+223 53 41 79 19</div>
+            </div>
+          </a>
+          <div class="cl-item">
+            <div class="cl-icon"><i class="fas fa-location-dot"></i></div>
+            <div>
+              <div class="cl-label">Localisation</div>
+              <div class="cl-value">Bamako, Diatoula — Mali</div>
+            </div>
+          </div>
+        </div>
+        <div class="social-row">
+          <a class="social-btn" href="https://github.com/diadiemaiga9161" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+          <a class="social-btn" href="https://linkedin.com/in/amadou-maiga" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+          <a class="social-btn" href="https://wa.me/22353417919" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a class="social-btn" href="mailto:doumaiga3@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+      </div>
+
+      <div class="contact-form fade-up">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Prénom</label>
+            <input type="text" placeholder="Votre prénom">
+          </div>
+          <div class="form-group">
+            <label>Nom</label>
+            <input type="text" placeholder="Votre nom">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="votre@email.com">
+        </div>
+        <div class="form-group">
+          <label>Sujet</label>
+          <input type="text" placeholder="Objet de votre demande">
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea rows="5" placeholder="Décrivez votre projet..."></textarea>
+        </div>
+        <button class="btn-gold" style="width:100%; justify-content:center;" onclick="handleSubmit()">
+          Envoyer le message <i class="fas fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== FOOTER ======================== -->
+<footer>
+  <p>© 2025 <strong>Amadou Maiga</strong> — Développeur Web Full-Stack · Bamako, Mali</p>
+  <p style="margin-top:8px;">
+    <a href="mailto:doumaiga3@gmail.com" style="color:var(--gold);">doumaiga3@gmail.com</a>
+    &nbsp;·&nbsp;
+    <a href="https://wa.me/22353417919" target="_blank" style="color:var(--gold);">WhatsApp</a>
+    &nbsp;·&nbsp;
+    <a href="https://github.com/diadiemaiga9161" target="_blank" style="color:var(--gold);">GitHub</a>
+  </p>
+</footer>
+
+<script>
+/* ===== PROJECTS DATA ===== */
+const projects = [
+  {
+    name: "Gestion de Boutique",
+    cat: "gestion",
+    catLabel: "Gestion",
+    icon: "fas fa-store",
+    desc: "Système complet de gestion de boutique : stock, ventes, clients, facturation et rapports.",
+    tags: ["Angular", "Laravel", "MySQL"]
+  },
+  {
+    name: "Gestion de Pressing",
+    cat: "gestion",
+    catLabel: "Gestion",
+    icon: "fas fa-shirt",
+    desc: "Application de gestion pour pressing : dépôts, commandes, retours et suivi client en temps réel.",
+    tags: ["Angular", "Laravel", "MySQL"]
+  },
+  {
+    name: "Gestion de Pharmacie",
+    cat: "gestion",
+    catLabel: "Gestion",
+    icon: "fas fa-pills",
+    desc: "Logiciel de gestion de pharmacie : stocks de médicaments, ordonnances, alertes de péremption.",
+    tags: ["Angular", "Symfony", "MySQL"]
+  },
+  {
+    name: "Avit Web",
+    cat: "web",
+    catLabel: "Site web",
+    icon: "fas fa-globe",
+    desc: "Site corporate pour cabinet conseil en informatique — design moderne et performance optimisée.",
+    tags: ["WordPress", "HTML", "CSS"]
+  },
+  {
+    name: "Bright Future",
+    cat: "web",
+    catLabel: "Site web",
+    icon: "fas fa-graduation-cap",
+    desc: "Plateforme de formation en ligne avec système d'inscription et gestion de contenu.",
+    tags: ["WordPress", "PHP"]
+  },
+  {
+    name: "PCRSS",
+    cat: "web",
+    catLabel: "Site web",
+    icon: "fas fa-building",
+    desc: "Site institutionnel pour organisation — présentation claire et navigation intuitive.",
+    tags: ["WordPress", "CSS"]
+  },
+  {
+    name: "Wagadou Toner",
+    cat: "web",
+    catLabel: "Site web",
+    icon: "fas fa-print",
+    desc: "E-commerce pour la vente d'imprimantes et consommables informatiques.",
+    tags: ["WordPress", "WooCommerce"]
+  },
+  {
+    name: "Rendez-Vous Pro",
+    cat: "app",
+    catLabel: "Application",
+    icon: "fas fa-calendar-check",
+    desc: "Application de prise de rendez-vous professionnels — planning intelligent et notifications.",
+    tags: ["Angular", "Laravel", "MySQL"]
+  },
+  {
+    name: "Audit Expert",
+    cat: "app",
+    catLabel: "Application",
+    icon: "fas fa-chart-bar",
+    desc: "Solution d'audit pour entreprises avec tableaux de bord analytiques et rapports PDF.",
+    tags: ["Angular", "Spring Boot", "MySQL"]
+  }
+];
+
+function renderProjects(filter = "all") {
+  const grid = document.getElementById('projGrid');
+  const list = filter === "all" ? projects : projects.filter(p => p.cat === filter);
+  grid.innerHTML = list.map(p => `
+    <div class="proj-card fade-up">
+      <div class="proj-thumb">
+        <i class="${p.icon} proj-thumb-icon"></i>
+        <span class="proj-cat-badge">${p.catLabel}</span>
+      </div>
+      <div class="proj-body">
+        <h3>${p.name}</h3>
+        <p>${p.desc}</p>
+        <div class="proj-tags">
+          ${p.tags.map(t => `<span class="proj-tag">${t}</span>`).join('')}
+        </div>
+      </div>
+    </div>
+  `).join('');
+  // Re-observe new cards
+  observeAll();
+}
+
+/* ===== FILTER ===== */
+document.querySelectorAll('#filterBtns button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('#filterBtns button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderProjects(btn.dataset.f);
+  });
+});
+
+/* ===== INTERSECTION OBSERVER (scroll animations) ===== */
+function observeAll() {
+  const els = document.querySelectorAll('.fade-up:not(.visible)');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  els.forEach(el => observer.observe(el));
+}
+
+/* ===== SKILL BARS ===== */
+function animateBars() {
+  const fills = document.querySelectorAll('.skill-bar-fill');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.transform = `scaleX(${e.target.style.getPropertyValue('--w') || 1})`;
+        e.target.classList.add('animated');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.4 });
+  fills.forEach(f => observer.observe(f));
+}
+
+/* ===== NAVBAR SCROLL ===== */
+window.addEventListener('scroll', () => {
+  const sections = document.querySelectorAll('section[id]');
+  let cur = '';
+  sections.forEach(s => {
+    if (pageYOffset >= s.offsetTop - 120) cur = s.id;
+  });
+  document.querySelectorAll('.nav-link').forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === `#${cur}`);
+  });
+});
+
+/* ===== MOBILE MENU ===== */
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+document.querySelectorAll('.nav-link').forEach(a => {
+  a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+});
+
+/* ===== FORM HANDLER ===== */
+function handleSubmit() {
+  const btn = document.querySelector('.contact-form .btn-gold');
+  btn.innerHTML = '<i class="fas fa-check"></i> Message envoyé !';
+  btn.style.background = '#27AE60';
+  setTimeout(() => {
+    btn.innerHTML = 'Envoyer le message <i class="fas fa-paper-plane"></i>';
+    btn.style.background = '';
+  }, 3000);
+}
+
+/* ===== INIT ===== */
+renderProjects();
+observeAll();
+animateBars();
+
+// Hero fade on load
+document.querySelector('.hero-content').style.opacity = '0';
+document.querySelector('.hero-content').style.transform = 'translateY(24px)';
+setTimeout(() => {
+  document.querySelector('.hero-content').style.transition = 'opacity 0.9s ease, transform 0.9s ease';
+  document.querySelector('.hero-content').style.opacity = '1';
+  document.querySelector('.hero-content').style.transform = 'translateY(0)';
+}, 200);
+</script>
+</body>
+</html>
