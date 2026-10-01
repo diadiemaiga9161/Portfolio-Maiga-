@@ -1,0 +1,72 @@
+================================================================================
+  PROMPT MASTER RÉUTILISABLE : CRÉATION DE PORTFOLIO GAMIFIÉ & FUTURISTE (CYBER HUD)
+  (Ce prompt permet à N'IMPORTE QUI de reproduire le MÊME DESIGN avec ses propres données)
+================================================================================
+
+[CONSIGNE À DONNER À L'IA]
+Agis en tant que Concepteur Web Lead & Expert UI/UX Frontend. 
+Ta mission est de concevoir et générer le code complet d'un **Portfolio Web Single-Page (SPA)** hautement immersif, futuriste, moderne et gamifié dans un style **Cyberpunk / Arcade HUD / Dark Mode Premium**.
+
+--------------------------------------------------------------------------------
+1. INFORMATIONS DU DÉVELOPPEUR (VARIABLES À PERSONNALISER)
+--------------------------------------------------------------------------------
+- Nom & Prénom : [Insérer le nom complet]
+- Titre / Spécialité : [ex: Développeur Full Stack | Ingénieur Logiciel | Concepteur Web]
+- Présentation courte : [Résumé de 2-3 phrases sur votre profil et votre passion]
+- Entreprise / Marque : [Nom de votre entreprise ou projet, ex: Maiga Consulting]
+- Stack Technique Clé : [ex: Backend: Spring Boot, Laravel, APIs REST | Frontend: Angular, React | Mobile: Ionic, Flutter | IA: Machine Learning]
+- Liens de contact :
+  * WhatsApp Direct : [Numéro WhatsApp avec indicatif]
+  * Téléphone : [Numéro de téléphone]
+  * Email : [Adresse e-mail]
+  * Site Web / Vitrine : [Lien de votre site web]
+
+--------------------------------------------------------------------------------
+2. SPÉCIFICATIONS DE DESIGN & CHARTE GRAPHIQUE (EXACTEMENT LE MÊME DESIGN)
+--------------------------------------------------------------------------------
+- Thème visuel : Dark Mode Futuriste & Glassmorphism Cyberpunk.
+- Palette de couleurs :
+  * Fond principal : Obscur (#04060A / #0B0F19)
+  * Couleur d'accentuation Cyber : Cyan Néon (#00f3ff) pour les bordures, boutons interactifs et lueurs.
+  * Couleur d'excellence / Trophées : Or Néon (#ffc800) pour les badges, niveaux et accomplissements.
+- Arrière-plan animé : Canvas JavaScript interactif générant un réseau de particules néons connectées qui réagissent aux mouvements du curseur.
+
+--------------------------------------------------------------------------------
+3. SYSTÈME DE GAMIFICATION & INTERACTION JOUEUR (HUD SYSTEM)
+--------------------------------------------------------------------------------
+1. PLAYER HUD BAR (Fixée en haut d'écran) :
+   - Pseudo du joueur : PLAYER: [Nom du développeur] [LVL 99]
+   - Statut en direct : ONLINE (Badge vert néon)
+   - Barre d'XP dynamique : Progression visuelle qui se remplit au fur et à mesure que le visiteur explore le site.
+   - Contrôle du son : Bouton Toggle Son Web Audio API (effets sonores synthétisés lors des clics).
+
+2. SYSTÈME DE SUCCÈS (ACHIEVEMENT TOASTS) :
+   - Affichage d'une notification rétro-futuriste "Achievement Unlocked!" à chaque action clé du visiteur (clic sur un projet, réponse au quiz, consultation des compétences).
+
+3. MINI-JEU INTERACTIF "LE GRAND CYBER QUIZ TECH" :
+   - QCM interactif vulgarisant la technologie pour les visiteurs et recruteurs (ex: C'est quoi HTML ?, C'est quoi une API REST ?, C'est quoi Spring Boot ?, etc.).
+   - Attribution de points d'XP (+500 XP par bonne réponse) et retour pédagogique instantané.
+
+--------------------------------------------------------------------------------
+4. SECTIONS & STRUCTURE DU SITE (SINGLE PAGE APPLICATION)
+--------------------------------------------------------------------------------
+- HERO SECTION : En-tête percutant avec effet de frappe automatique (typing effect), photo/avatar dans un cadre néon et boutons d'action d'exploration.
+- À PROPOS & ENTREPRISE : Présentation de la vision technique, de l'entreprise et des certifications majeures.
+- CYBER QUIZ TECH : Mini-jeu interactif QCM.
+- APERÇU DE QUELQUES CAPTURES RÉELLES : Grille de cartes présentant une sélection d'échantillons de captures réelles des projets.
+- PARCOURS & ÉTAPES (CAREER QUEST) : Timeline gamifiée de l'expérience et des diplômes avec gains d'XP et numéros de niveaux [STAGE 01, STAGE 02...].
+- ARSENAL DE PROJETS (PROJECTS ARCADE VAULT) : Grille filtrable par catégorie (Tous, Gestion, Web, Mobile) avec cartes de projets indiquant la rareté [LÉGENDAIRE / ÉPIQUE].
+- VISEUR LIGHTBOX MODAL DE CAPTURES (CYBER MODAL) :
+  * Fenêtre modale avec fond flouté (backdrop blur).
+  * Carrousel de vignettes miniatures (thumbnails) pour naviguer entre plusieurs captures d'un même projet.
+  * Flèches de navigation et support des touches du clavier (← / →).
+  * FACILITÉ DE FERMETURE (Fermeture par clic sur le fond extérieur, touche Échap/ESC, bouton ✕ rouge néon et bouton de fermeture bas).
+- CONTACT & ACTION EN 1 CLIC : Formulaire, WhatsApp direct et boutons de copie rapide d'e-mail/téléphone.
+
+--------------------------------------------------------------------------------
+5. CONTRAINTES DE CODE
+--------------------------------------------------------------------------------
+- Code 100% autonome réuni dans un seul fichier HTML/CSS/JS (`index.html`).
+- Vanilla JavaScript & CSS3 pur sans dépendances externes lourdes (utiliser FontAwesome CDN pour les icônes).
+- Design responsive optimisé pour mobile, tablette et ordinateur.
+================================================================================

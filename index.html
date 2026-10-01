@@ -3,1674 +3,1546 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Amadou Maiga — Développeur Web Full-Stack basé à Bamako, Mali.">
-  <title>Amadou Maiga · Développeur Web</title>
+  <meta name="description" content="Amadou Maiga — Développeur Full Stack, Ingénieur Logiciel & Fondateur de Maiga Consulting. Expert Spring Boot, Angular, Laravel, Ionic, React & Machine Learning à Bamako, Mali.">
+  <meta name="keywords" content="Amadou Maiga, Maiga Consulting, Développeur Full Stack, Ingénieur Logiciel, Bamako, Mali, Spring Boot, Angular, Laravel, Ionic, React, Machine Learning">
+  <meta property="og:title" content="Amadou Maiga · Développeur Full Stack & Ingénieur Logiciel">
+  <title>Amadou Maiga · Développeur Full Stack & Ingénieur Logiciel</title>
 
-  <!-- Fonts -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
-  <!-- Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Press+Start+2P&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <style>
-    /* ===========================
-       CSS VARIABLES & RESET
-    =========================== */
+    /* ==========================================
+       DESIGN SYSTEM & GAMIFIED TOKENS
+    ========================================== */
     :root {
-      --bg:        #0C0D10;
-      --bg2:       #111318;
-      --bg3:       #181B22;
-      --border:    rgba(255,255,255,0.07);
-      --gold:      #E8A838;
-      --gold2:     #F5C76A;
-      --white:     #F0EDE8;
-      --muted:     #8A8F9E;
-      --radius:    20px;
-      --font-head: 'Syne', sans-serif;
-      --font-body: 'DM Sans', sans-serif;
+      --bg-dark:        #050608;
+      --bg-card:        rgba(15, 18, 28, 0.88);
+      --bg-card-hover:  rgba(25, 30, 48, 0.98);
+      --bg-surface:     #0B0E17;
+      
+      --gold:           #FFB800;
+      --gold-glow:      rgba(255, 184, 0, 0.4);
+      --cyan:           #00F0FF;
+      --cyan-glow:      rgba(0, 240, 255, 0.4);
+      --neon-green:     #10B981;
+      --neon-pink:      #FF007F;
+      --purple:         #9333EA;
+      --orange-brand:   #FF6B00;
+      
+      --text-main:      #F8FAFC;
+      --text-muted:     #94A3B8;
+      --border-color:   rgba(255, 255, 255, 0.12);
+      
+      --radius-sm:      10px;
+      --radius-md:      18px;
+      --radius-lg:      28px;
+      --radius-full:    9999px;
+      
+      --font-pixel:     'Press Start 2P', monospace;
+      --font-futuristic:'Orbitron', sans-serif;
+      --font-head:      'Syne', sans-serif;
+      --font-body:      'Plus Jakarta Sans', sans-serif;
+      
+      --transition-fast: 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      --transition-smooth: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    *, *::before, *::after {
+      margin: 0; padding: 0;
+      box-sizing: border-box;
+    }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; color-scheme: dark; }
 
     body {
       font-family: var(--font-body);
-      background: var(--bg);
-      color: var(--white);
+      background-color: var(--bg-dark);
+      color: var(--text-main);
       overflow-x: hidden;
+      line-height: 1.6;
     }
 
-    /* Scrollbar */
-    ::-webkit-scrollbar { width: 5px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 10px; }
+    ::selection { background: var(--neon-pink); color: #fff; }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg-dark); }
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(to bottom, var(--gold), var(--cyan), var(--neon-pink));
+      border-radius: 10px;
+    }
 
     a { text-decoration: none; color: inherit; }
 
     .container {
-      max-width: 1180px;
+      max-width: 1240px;
       margin: 0 auto;
-      padding: 0 28px;
+      padding: 0 24px;
     }
 
-    section { padding: 110px 0; }
+    section { padding: 110px 0; position: relative; }
 
-    /* ===========================
-       NOISE TEXTURE OVERLAY
-    =========================== */
-    body::before {
-      content: '';
+    /* Canvas background */
+    #cyberCanvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.55;
+    }
+
+    .grid-overlay {
       position: fixed;
       inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      background-image: 
+        linear-gradient(rgba(0, 240, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 184, 0, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
       pointer-events: none;
-      z-index: 9999;
+      z-index: 1;
       opacity: 0.4;
     }
 
-    /* ===========================
-       NAVBAR
-    =========================== */
-    .navbar {
+    .cursor-glow {
+      position: fixed;
+      width: 380px; height: 380px;
+      background: radial-gradient(circle, rgba(255, 0, 127, 0.07) 0%, rgba(0, 240, 255, 0.04) 40%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 2;
+    }
+
+    /* PLAYER HUD BAR */
+    .player-hud-bar {
       position: fixed;
       top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 0 28px;
+      z-index: 1200;
+      background: rgba(11, 14, 23, 0.95);
+      border-bottom: 2px solid rgba(255, 184, 0, 0.35);
       backdrop-filter: blur(20px);
-      background: rgba(12,13,16,0.85);
-      border-bottom: 1px solid var(--border);
-      height: 70px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      padding: 8px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 0.8rem;
+      box-shadow: 0 5px 25px rgba(0,0,0,0.8);
     }
 
-    .nav-logo {
-      font-family: var(--font-head);
-      font-size: 1.4rem;
-      font-weight: 800;
-      letter-spacing: -0.5px;
+    .hud-player-info { display: flex; align-items: center; gap: 12px; }
+
+    .player-avatar-mini {
+      width: 34px; height: 34px;
+      border-radius: 8px;
+      border: 1px solid var(--gold);
+      background: url('assets/amadou.jpg') center/cover;
+      box-shadow: 0 0 10px var(--gold-glow);
     }
 
-    .nav-logo span { color: var(--gold); }
-
-    .nav-links {
-      display: flex;
-      list-style: none;
-      gap: 2.2rem;
+    .player-name-tag {
+      font-family: var(--font-futuristic);
+      font-weight: 800; color: var(--text-main);
+      display: flex; align-items: center; gap: 8px;
     }
 
-    .nav-links a {
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: var(--muted);
-      transition: color 0.2s;
-      position: relative;
+    .player-name-tag .lvl-badge {
+      background: var(--gold); color: #000;
+      font-family: var(--font-pixel); font-size: 0.58rem;
+      padding: 2px 6px; border-radius: 4px;
     }
 
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px; left: 0;
-      width: 0; height: 2px;
-      background: var(--gold);
-      border-radius: 2px;
-      transition: width 0.3s;
+    .xp-container {
+      display: flex; align-items: center; gap: 10px;
+      flex-grow: 1; max-width: 320px; margin: 0 20px;
     }
 
-    .nav-links a:hover,
-    .nav-links a.active {
-      color: var(--white);
+    .xp-label { font-family: var(--font-pixel); font-size: 0.6rem; color: var(--cyan); }
+    .xp-bar-bg { flex-grow: 1; height: 10px; background: rgba(255, 255, 255, 0.1); border: 1px solid var(--cyan); border-radius: 6px; overflow: hidden; }
+    .xp-bar-fill { height: 100%; width: 95%; background: linear-gradient(90deg, var(--gold), var(--cyan), var(--neon-pink)); border-radius: 6px; transition: width 0.5s ease; box-shadow: 0 0 10px var(--cyan); }
+
+    .hud-achievements { display: flex; align-items: center; gap: 16px; font-family: var(--font-futuristic); color: var(--gold); }
+    .trophy-badge { display: flex; align-items: center; gap: 6px; background: rgba(255, 184, 0, 0.12); border: 1px solid rgba(255, 184, 0, 0.4); padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; }
+
+    /* NAVBAR */
+    .navbar {
+      position: fixed; top: 50px; left: 50%;
+      transform: translateX(-50%); width: min(92%, 1240px);
+      z-index: 1000; padding: 12px 28px;
+      background: rgba(15, 18, 28, 0.88); backdrop-filter: blur(20px);
+      border: 1px solid var(--border-color); border-radius: var(--radius-full);
+      display: flex; align-items: center; justify-content: space-between;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
     }
 
-    .nav-links a:hover::after,
-    .nav-links a.active::after { width: 100%; }
+    .nav-logo { font-family: var(--font-futuristic); font-size: 1.15rem; font-weight: 900; display: flex; align-items: center; gap: 10px; }
+    .nav-logo .logo-box { width: 32px; height: 32px; background: linear-gradient(135deg, var(--neon-pink), var(--gold)); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #fff; font-family: var(--font-pixel); font-size: 0.65rem; }
+    .nav-links { display: flex; list-style: none; gap: 1.6rem; align-items: center; }
+    .nav-links a { font-size: 0.85rem; font-weight: 600; color: var(--text-muted); transition: var(--transition-fast); }
+    .nav-links a:hover, .nav-links a.active { color: var(--text-main); text-shadow: 0 0 10px var(--cyan); }
+    .nav-cta { background: linear-gradient(135deg, var(--gold), #e09800) !important; color: #000 !important; font-weight: 800 !important; padding: 8px 18px !important; border-radius: var(--radius-full) !important; font-size: 0.8rem !important; display: flex; align-items: center; gap: 6px; box-shadow: 0 0 20px var(--gold-glow); }
 
-    .nav-cta {
-      background: var(--gold);
-      color: #0C0D10 !important;
-      font-weight: 700 !important;
-      padding: 9px 22px;
-      border-radius: 40px;
-      font-size: 0.88rem !important;
-      transition: transform 0.2s, box-shadow 0.2s !important;
-    }
-    .nav-cta::after { display: none !important; }
-    .nav-cta:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(232,168,56,0.35);
-    }
+    .hamburger { display: none; background: none; border: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { width: 24px; height: 2px; background: #fff; border-radius: 2px; }
 
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      background: none;
-      border: none;
-    }
-    .hamburger span {
-      width: 24px; height: 2px;
-      background: var(--white);
-      border-radius: 2px;
-      transition: 0.3s;
-    }
-
-    /* ===========================
-       HERO
-    =========================== */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding-top: 70px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Radial glow background */
-    .hero::after {
-      content: '';
-      position: absolute;
-      top: -200px; right: -200px;
-      width: 700px; height: 700px;
-      background: radial-gradient(circle, rgba(232,168,56,0.12) 0%, transparent 65%);
+    /* TOAST */
+    .achievement-toast {
+      position: fixed; bottom: 90px; right: 30px;
+      z-index: 2000; background: rgba(11, 14, 23, 0.95);
+      border: 2px solid var(--gold); border-radius: var(--radius-md);
+      padding: 16px 22px; display: flex; align-items: center; gap: 16px;
+      box-shadow: 0 0 35px var(--gold-glow); backdrop-filter: blur(15px);
+      transform: translateY(150px); opacity: 0; transition: transform 0.4s ease, opacity 0.4s ease;
       pointer-events: none;
     }
+    .achievement-toast.show { transform: translateY(0); opacity: 1; }
 
-    .hero-inner {
-      display: grid;
-      grid-template-columns: 1fr 440px;
-      gap: 60px;
-      align-items: center;
-      width: 100%;
+    /* HERO SECTION */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      padding-top: 155px; padding-bottom: 60px; z-index: 2;
     }
+
+    .hero-grid { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 60px; align-items: center; }
 
     .hero-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(232,168,56,0.1);
-      border: 1px solid rgba(232,168,56,0.25);
-      padding: 6px 16px;
-      border-radius: 40px;
-      font-size: 0.82rem;
-      color: var(--gold);
-      font-weight: 500;
-      margin-bottom: 24px;
-      letter-spacing: 0.5px;
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(255, 0, 127, 0.12); border: 1px solid rgba(255, 0, 127, 0.4);
+      padding: 6px 16px; border-radius: var(--radius-full);
+      font-size: 0.75rem; color: var(--neon-pink); font-family: var(--font-pixel); margin-bottom: 24px;
     }
 
-    .hero-tag i { font-size: 0.75rem; }
+    .hero-title { font-family: var(--font-head); font-size: clamp(2.8rem, 5vw, 4.4rem); font-weight: 800; line-height: 1.05; margin-bottom: 20px; }
+    .hero-title .gradient-text { background: linear-gradient(135deg, var(--gold) 0%, var(--cyan) 50%, var(--neon-pink) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-    .hero h1 {
-      font-family: var(--font-head);
-      font-size: clamp(2.8rem, 5vw, 4.4rem);
-      font-weight: 800;
-      line-height: 1.08;
-      letter-spacing: -1.5px;
-      margin-bottom: 24px;
+    .typing-box { font-family: var(--font-futuristic); font-size: 1.15rem; color: var(--cyan); margin-bottom: 24px; min-height: 36px; display: flex; align-items: center; gap: 8px; }
+    .hero-desc { color: var(--text-muted); font-size: 1.05rem; line-height: 1.8; max-width: 600px; margin-bottom: 36px; }
+
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 40px; }
+
+    .btn-cyber-gold {
+      background: linear-gradient(135deg, var(--gold), #d99600);
+      color: #000; font-weight: 900; font-family: var(--font-futuristic);
+      padding: 15px 34px; border-radius: var(--radius-full); font-size: 0.9rem;
+      display: inline-flex; align-items: center; gap: 10px;
+      box-shadow: 0 0 25px var(--gold-glow); transition: var(--transition-fast);
+      border: none; cursor: pointer;
     }
+    .btn-cyber-gold:hover { transform: translateY(-3px) scale(1.02); }
 
-    .hero h1 em {
-      font-style: normal;
-      color: var(--gold);
+    .btn-cyber-cyan {
+      background: rgba(255, 255, 255, 0.04); border: 1px solid var(--cyan);
+      color: var(--cyan); font-weight: 700; font-family: var(--font-futuristic);
+      padding: 15px 34px; border-radius: var(--radius-full); font-size: 0.9rem;
+      display: inline-flex; align-items: center; gap: 10px;
+      transition: var(--transition-fast); cursor: pointer;
     }
+    .btn-cyber-cyan:hover { background: rgba(0, 240, 255, 0.15); transform: translateY(-3px); }
 
-    .hero-desc {
-      color: var(--muted);
-      font-size: 1.08rem;
-      line-height: 1.7;
-      max-width: 520px;
-      margin-bottom: 40px;
+    .portrait-card {
+      position: relative; width: 100%; max-width: 390px;
+      background: var(--bg-card); border: 2px solid var(--gold);
+      border-radius: var(--radius-lg); padding: 12px;
+      box-shadow: 0 0 40px var(--gold-glow);
     }
+    .portrait-img { width: 100%; height: 480px; object-fit: cover; object-position: top center; border-radius: 20px; display: block; }
 
-    .hero-btns {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
+    .portrait-company-badge {
+      position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
+      width: 88%; background: rgba(11, 14, 23, 0.92); border: 1px solid var(--cyan);
+      padding: 12px 18px; border-radius: 14px; backdrop-filter: blur(15px);
+      display: flex; align-items: center; justify-content: space-between;
     }
+    .portrait-company-badge strong { font-family: var(--font-head); font-size: 0.95rem; color: #fff; }
+    .portrait-company-badge span { font-size: 0.72rem; color: var(--gold); font-family: var(--font-futuristic); }
 
-    .btn-gold {
-      background: var(--gold);
-      color: #0C0D10;
-      font-weight: 700;
-      font-family: var(--font-head);
-      padding: 14px 32px;
-      border-radius: 40px;
-      font-size: 0.95rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      transition: transform 0.2s, box-shadow 0.2s;
-      border: none;
-      cursor: pointer;
+    /* SECTION HEADERS */
+    .sec-header { margin-bottom: 60px; text-align: center; }
+    .sec-subtitle { font-family: var(--font-pixel); font-size: 0.65rem; color: var(--neon-pink); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; display: block; }
+    .sec-title { font-family: var(--font-head); font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; }
+    .sec-title span { color: var(--gold); }
+    .cyber-line-divider { width: 80px; height: 4px; background: linear-gradient(90deg, var(--neon-pink), var(--gold), var(--cyan)); border-radius: 4px; margin: 16px auto 0; }
+
+    /* ABOUT & MAIGA CONSULTING */
+    #about { background: var(--bg-surface); z-index: 2; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start; }
+    .about-text p { color: var(--text-muted); font-size: 1.02rem; line-height: 1.8; margin-bottom: 20px; }
+
+    .maiga-consulting-card {
+      background: linear-gradient(135deg, rgba(255, 107, 0, 0.12), rgba(255, 184, 0, 0.05));
+      border: 1px solid rgba(255, 107, 0, 0.4); border-radius: var(--radius-lg);
+      padding: 32px; box-shadow: 0 0 30px rgba(255, 107, 0, 0.15);
     }
+    .maiga-consulting-card h3 { font-family: var(--font-head); font-size: 1.4rem; color: var(--gold); margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+    .maiga-consulting-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.7; margin-bottom: 20px; }
+    .maiga-consulting-btn { display: inline-flex; align-items: center; gap: 10px; background: var(--orange-brand); color: #fff; font-weight: 800; font-family: var(--font-futuristic); padding: 12px 24px; border-radius: var(--radius-full); font-size: 0.85rem; }
 
-    .btn-gold:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 30px rgba(232,168,56,0.4);
+    .odc-card { background: rgba(255, 107, 0, 0.05); border: 1px solid rgba(255, 107, 0, 0.25); border-radius: var(--radius-md); padding: 24px; margin-top: 24px; display: flex; align-items: center; gap: 20px; }
+    .odc-icon { width: 54px; height: 54px; background: var(--orange-brand); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.6rem; flex-shrink: 0; }
+
+    /* QUIZ GAME SECTION */
+    #quiz-game { background: linear-gradient(to bottom, var(--bg-dark), #0C0F1A); z-index: 2; }
+    .quiz-box { background: var(--bg-card); border: 2px solid var(--cyan); border-radius: var(--radius-lg); padding: 40px; max-width: 820px; margin: 0 auto; box-shadow: 0 0 50px var(--cyan-glow); }
+    .quiz-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border-color); }
+    .quiz-step-tag { font-family: var(--font-pixel); font-size: 0.7rem; color: var(--neon-pink); }
+    .quiz-score-tag { font-family: var(--font-futuristic); font-size: 0.9rem; color: var(--gold); font-weight: 800; }
+    .quiz-question { font-family: var(--font-head); font-size: 1.35rem; color: #fff; margin-bottom: 24px; }
+    .quiz-options { display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px; }
+
+    .quiz-opt-btn {
+      background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color);
+      color: var(--text-main); padding: 16px 20px; border-radius: var(--radius-md);
+      font-size: 0.95rem; text-align: left; cursor: pointer; transition: var(--transition-fast);
+      display: flex; align-items: center; gap: 14px;
     }
+    .quiz-opt-btn:hover { border-color: var(--cyan); background: rgba(0, 240, 255, 0.08); transform: translateX(6px); }
+    .quiz-opt-btn.correct { background: rgba(16, 185, 129, 0.2) !important; border-color: var(--neon-green) !important; color: #fff !important; }
+    .quiz-opt-btn.wrong { background: rgba(239, 68, 68, 0.2) !important; border-color: #EF4444 !important; }
 
-    .btn-ghost {
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.04);
-      color: var(--white);
-      font-weight: 500;
-      font-family: var(--font-body);
-      padding: 14px 32px;
-      border-radius: 40px;
-      font-size: 0.95rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      transition: border-color 0.2s, background 0.2s;
-      cursor: pointer;
+    .quiz-opt-letter { width: 28px; height: 28px; background: rgba(255, 255, 255, 0.1); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: var(--font-futuristic); font-weight: 800; font-size: 0.8rem; flex-shrink: 0; }
+    .quiz-explanation { background: rgba(0, 240, 255, 0.08); border: 1px solid var(--cyan); border-radius: var(--radius-sm); padding: 16px; font-size: 0.9rem; color: #fff; margin-bottom: 20px; display: none; }
+    .quiz-next-btn { background: linear-gradient(135deg, var(--gold), #d99600); color: #000; font-family: var(--font-futuristic); font-weight: 900; padding: 12px 28px; border-radius: var(--radius-full); border: none; cursor: pointer; display: none; }
+
+    /* REAL SCREENSHOTS GALLERY SECTION */
+    #screenshots-gallery { background: var(--bg-surface); z-index: 2; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+
+    .gallery-item-card {
+      background: var(--bg-card); border: 1px solid var(--border-color);
+      border-radius: var(--radius-md); overflow: hidden; transition: var(--transition-smooth);
+      position: relative; cursor: pointer;
     }
+    .gallery-item-card:hover { transform: translateY(-8px) scale(1.02); border-color: var(--gold); box-shadow: 0 0 35px var(--gold-glow); }
+    .gallery-img-wrap { width: 100%; height: 220px; overflow: hidden; background: #000; position: relative; }
+    .gallery-img-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform 0.5s ease; }
+    .gallery-item-card:hover .gallery-img-wrap img { transform: scale(1.08); }
 
-    .btn-ghost:hover {
-      border-color: var(--gold);
-      background: rgba(232,168,56,0.06);
+    .gallery-overlay-badge {
+      position: absolute; bottom: 12px; left: 12px; right: 12px;
+      background: rgba(11, 14, 23, 0.88); border: 1px solid var(--cyan);
+      backdrop-filter: blur(10px); padding: 10px 14px; border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: space-between;
     }
+    .gallery-overlay-badge strong { font-family: var(--font-head); font-size: 0.9rem; color: #fff; }
+    .gallery-overlay-badge span { font-size: 0.72rem; color: var(--gold); font-family: var(--font-futuristic); }
 
-    /* Hero stats */
-    .hero-stats {
-      display: flex;
-      gap: 40px;
-      margin-top: 50px;
+    /* EXPERIENCE & CAREER QUEST STAGES */
+    #experience { z-index: 2; }
+    .stages-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+    .stage-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 28px 24px; position: relative; transition: var(--transition-smooth); cursor: pointer; }
+    .stage-card:hover { transform: translateY(-8px); border-color: var(--gold); box-shadow: 0 0 30px var(--gold-glow); }
+    .stage-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+    .stage-num { font-family: var(--font-pixel); font-size: 0.65rem; color: var(--cyan); }
+    .stage-xp { background: rgba(255, 184, 0, 0.15); color: var(--gold); font-family: var(--font-futuristic); font-size: 0.75rem; padding: 4px 10px; border-radius: 6px; font-weight: 800; }
+    .stage-card h3 { font-family: var(--font-head); font-size: 1.25rem; margin-bottom: 4px; }
+    .stage-company { color: var(--gold); font-size: 0.88rem; margin-bottom: 14px; font-weight: 600; }
+
+    /* PROJECTS ARCADE VAULT */
+    #projects { z-index: 2; }
+    .proj-filters { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-bottom: 45px; }
+
+    .proj-btn {
+      background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color);
+      color: var(--text-muted); padding: 10px 24px; border-radius: var(--radius-full);
+      font-family: var(--font-futuristic); font-size: 0.82rem; font-weight: 700;
+      cursor: pointer; transition: var(--transition-fast);
     }
+    .proj-btn.active, .proj-btn:hover { background: var(--neon-pink); border-color: var(--neon-pink); color: #fff; box-shadow: 0 0 25px rgba(255, 0, 127, 0.5); }
 
-    .stat-num {
-      font-family: var(--font-head);
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--gold);
-      line-height: 1;
-    }
-
-    .stat-label {
-      font-size: 0.82rem;
-      color: var(--muted);
-      margin-top: 5px;
-    }
-
-    /* Hero Photo */
-    .hero-photo-wrap {
-      position: relative;
-    }
-
-    .hero-photo-wrap::before {
-      content: '';
-      position: absolute;
-      inset: -3px;
-      background: linear-gradient(135deg, var(--gold), transparent 60%);
-      border-radius: 32px;
-      z-index: 0;
-    }
-
-    .hero-photo-wrap img {
-      width: 100%;
-      height: 560px;
-      object-fit: cover;
-      object-position: top center;
-      border-radius: 30px;
-      display: block;
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-badge-float {
-      position: absolute;
-      bottom: 28px;
-      left: -24px;
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 14px 20px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      z-index: 2;
-      backdrop-filter: blur(10px);
-    }
-
-    .badge-icon {
-      width: 44px; height: 44px;
-      background: rgba(232,168,56,0.15);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.3rem;
-      color: var(--gold);
-    }
-
-    .badge-text strong {
-      font-family: var(--font-head);
-      font-size: 1.1rem;
-      display: block;
-    }
-
-    .badge-text span {
-      font-size: 0.78rem;
-      color: var(--muted);
-    }
-
-    /* ===========================
-       SECTION HEADER
-    =========================== */
-    .sec-label {
-      color: var(--gold);
-      font-family: var(--font-head);
-      font-size: 0.78rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      margin-bottom: 12px;
-      display: block;
-    }
-
-    .sec-title {
-      font-family: var(--font-head);
-      font-size: clamp(1.9rem, 3.5vw, 2.8rem);
-      font-weight: 800;
-      letter-spacing: -1px;
-      line-height: 1.15;
-    }
-
-    .sec-header {
-      margin-bottom: 60px;
-    }
-
-    /* ===========================
-       ABOUT
-    =========================== */
-    #about { background: var(--bg2); }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 70px;
-      align-items: center;
-    }
-
-    .about-text p {
-      color: var(--muted);
-      line-height: 1.8;
-      margin-bottom: 20px;
-      font-size: 1.02rem;
-    }
-
-    .about-checks {
-      margin: 30px 0;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .check-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 0.95rem;
-    }
-
-    .check-item i {
-      color: var(--gold);
-      font-size: 0.9rem;
-    }
-
-    .about-aside {
-      background: var(--bg3);
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      padding: 36px 32px;
-    }
-
-    .about-aside h3 {
-      font-family: var(--font-head);
-      font-size: 1.2rem;
-      margin-bottom: 24px;
-    }
-
-    .skill-bar-item {
-      margin-bottom: 20px;
-    }
-
-    .skill-bar-top {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.88rem;
-      margin-bottom: 8px;
-    }
-
-    .skill-bar-top span:last-child { color: var(--gold); font-weight: 600; }
-
-    .skill-bar-bg {
-      height: 6px;
-      background: rgba(255,255,255,0.07);
-      border-radius: 10px;
-      overflow: hidden;
-    }
-
-    .skill-bar-fill {
-      height: 100%;
-      background: linear-gradient(90deg, var(--gold), var(--gold2));
-      border-radius: 10px;
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
-    }
-
-    .skill-bar-fill.animated { transform: scaleX(1); }
-
-    /* ===========================
-       SERVICES
-    =========================== */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .srv-card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 36px 28px;
-      transition: border-color 0.3s, transform 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .srv-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--gold), transparent);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
-    .srv-card:hover {
-      border-color: rgba(232,168,56,0.3);
-      transform: translateY(-6px);
-    }
-
-    .srv-card:hover::before { opacity: 1; }
-
-    .srv-icon {
-      width: 56px; height: 56px;
-      background: rgba(232,168,56,0.1);
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      color: var(--gold);
-      margin-bottom: 24px;
-    }
-
-    .srv-card h3 {
-      font-family: var(--font-head);
-      font-size: 1.2rem;
-      margin-bottom: 12px;
-    }
-
-    .srv-card p {
-      color: var(--muted);
-      font-size: 0.93rem;
-      line-height: 1.6;
-    }
-
-    /* ===========================
-       EXPERIENCE
-    =========================== */
-    #experience { background: var(--bg2); }
-
-    .exp-timeline {
-      position: relative;
-      padding-left: 30px;
-    }
-
-    .exp-timeline::before {
-      content: '';
-      position: absolute;
-      left: 0; top: 8px; bottom: 0;
-      width: 2px;
-      background: linear-gradient(to bottom, var(--gold), transparent);
-    }
-
-    .exp-item {
-      position: relative;
-      margin-bottom: 40px;
-      padding-left: 36px;
-    }
-
-    .exp-item::before {
-      content: '';
-      position: absolute;
-      left: -35px; top: 8px;
-      width: 12px; height: 12px;
-      background: var(--gold);
-      border-radius: 50%;
-      box-shadow: 0 0 0 4px rgba(232,168,56,0.15);
-    }
-
-    .exp-date {
-      font-size: 0.8rem;
-      color: var(--gold);
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-
-    .exp-item h3 {
-      font-family: var(--font-head);
-      font-size: 1.2rem;
-      margin-bottom: 4px;
-    }
-
-    .exp-company {
-      color: var(--muted);
-      font-size: 0.9rem;
-      margin-bottom: 10px;
-    }
-
-    .exp-item ul {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .exp-item ul li {
-      font-size: 0.9rem;
-      color: var(--muted);
-      display: flex;
-      gap: 8px;
-    }
-
-    .exp-item ul li::before {
-      content: '→';
-      color: var(--gold);
-      flex-shrink: 0;
-    }
-
-    /* ===========================
-       SKILLS
-    =========================== */
-    .tech-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-      gap: 18px;
-    }
-
-    .tech-item {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 22px 12px 18px;
-      text-align: center;
-      transition: border-color 0.25s, transform 0.25s;
-    }
-
-    .tech-item:hover {
-      border-color: rgba(232,168,56,0.4);
-      transform: translateY(-5px);
-    }
-
-    .tech-item i {
-      font-size: 2.2rem;
-      color: var(--gold);
-      margin-bottom: 10px;
-      display: block;
-    }
-
-    .tech-item span {
-      font-size: 0.8rem;
-      color: var(--muted);
-      font-weight: 500;
-    }
-
-    /* ===========================
-       PROJECTS
-    =========================== */
-    #projects { background: var(--bg2); }
-
-    .proj-filter {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 44px;
-    }
-
-    .proj-filter button {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      padding: 8px 22px;
-      border-radius: 40px;
-      font-size: 0.88rem;
-      cursor: pointer;
-      font-family: var(--font-body);
-      transition: 0.2s;
-    }
-
-    .proj-filter button.active,
-    .proj-filter button:hover {
-      background: var(--gold);
-      border-color: var(--gold);
-      color: #0C0D10;
-      font-weight: 700;
-    }
-
-    .proj-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-      gap: 24px;
-    }
+    .proj-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 30px; }
 
     .proj-card {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      transition: transform 0.3s, border-color 0.3s;
+      background: var(--bg-card); border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg); overflow: hidden; transition: var(--transition-smooth);
+      cursor: pointer; display: flex; flex-direction: column;
+    }
+    .proj-card:hover { transform: translateY(-8px); border-color: var(--cyan); box-shadow: 0 0 35px var(--cyan-glow); }
+
+    .proj-banner-img {
+      height: 220px; width: 100%; background: #000; overflow: hidden; position: relative;
+    }
+    .proj-banner-img img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform 0.5s ease; }
+    .proj-card:hover .proj-banner-img img { transform: scale(1.08); }
+
+    .proj-banner-icon {
+      height: 200px; width: 100%;
+      background: linear-gradient(135deg, #121826, #090D15);
+      position: relative; display: flex; align-items: center; justify-content: center;
+    }
+    .proj-banner-icon i { font-size: 4rem; color: rgba(0, 240, 255, 0.3); transition: var(--transition-smooth); }
+    .proj-card:hover .proj-banner-icon i { transform: scale(1.18) rotate(-5deg); color: var(--cyan); }
+
+    .rarity-pill {
+      position: absolute; top: 14px; left: 14px; z-index: 10;
+      font-family: var(--font-pixel); font-size: 0.58rem; padding: 4px 10px; border-radius: 6px; text-transform: uppercase;
+    }
+    .rarity-pill.legendary { background: rgba(255, 184, 0, 0.85); color: #000; font-weight: 900; }
+    .rarity-pill.epic { background: rgba(147, 51, 234, 0.85); color: #fff; font-weight: 900; }
+
+    .proj-body { padding: 24px; flex-grow: 1; display: flex; flex-direction: column; }
+    .proj-body h3 { font-family: var(--font-head); font-size: 1.25rem; margin-bottom: 8px; }
+    .proj-body p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 18px; flex-grow: 1; }
+
+    .proj-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 18px; }
+    .proj-tag { background: rgba(255,255,255,0.05); padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; color: var(--text-muted); }
+
+    .proj-inspect-btn {
+      width: 100%; background: linear-gradient(135deg, var(--gold), #d99600);
+      color: #000; font-family: var(--font-futuristic); font-weight: 800; font-size: 0.82rem;
+      padding: 12px; border-radius: var(--radius-sm); border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
     }
 
-    .proj-card:hover {
-      transform: translateY(-8px);
-      border-color: rgba(232,168,56,0.3);
+    /* MODAL LIGHTBOX FOR SCREENSHOTS & PROJECTS */
+    .modal-backdrop {
+      position: fixed; inset: 0;
+      background: rgba(3, 5, 10, 0.92); backdrop-filter: blur(18px);
+      z-index: 2200; display: flex; align-items: center; justify-content: center;
+      padding: 20px; opacity: 0; pointer-events: none; transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .modal-backdrop.active { opacity: 1; pointer-events: auto; }
+
+    .modal-box {
+      background: #0B0F19; border: 1.5px solid var(--cyan);
+      border-radius: var(--radius-lg); max-width: 960px; width: 100%;
+      padding: 28px; position: relative;
+      box-shadow: 0 0 60px rgba(0, 243, 255, 0.25), inset 0 0 20px rgba(0, 243, 255, 0.05);
+      max-height: 92vh; overflow-y: auto;
+      transform: scale(0.92); transition: transform 0.3s ease;
+    }
+    .modal-backdrop.active .modal-box { transform: scale(1); }
+
+    .modal-close {
+      position: absolute; top: 16px; right: 16px;
+      background: rgba(255, 50, 50, 0.15); border: 1px solid rgba(255, 100, 100, 0.4);
+      color: #ff6b6b; width: 42px; height: 42px; border-radius: 50%; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; transition: all 0.25s ease; z-index: 20;
+    }
+    .modal-close:hover {
+      background: #ff3333; color: #fff; transform: rotate(90deg) scale(1.1);
+      box-shadow: 0 0 25px rgba(255, 51, 51, 0.7);
     }
 
-    .proj-thumb {
-      height: 200px;
-      background: var(--bg3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
+    /* LIGHTBOX HERO CAROUSEL */
+    .lightbox-hero {
+      position: relative; border-radius: 14px; overflow: hidden;
+      border: 1.5px solid rgba(0, 243, 255, 0.4);
+      background: #04060A; box-shadow: 0 0 35px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(0, 243, 255, 0.1);
+      margin-bottom: 14px; display: flex; align-items: center; justify-content: center;
+      min-height: 250px;
     }
-
-    .proj-thumb-icon {
-      font-size: 4rem;
-      color: rgba(232,168,56,0.25);
-      transition: transform 0.4s;
+    .lightbox-hero img {
+      width: 100%; max-height: 520px; object-fit: contain; display: block;
+      transition: opacity 0.25s ease;
     }
-
-    .proj-card:hover .proj-thumb-icon {
-      transform: scale(1.15);
+    .lightbox-nav-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(5, 10, 20, 0.85); border: 1.5px solid var(--cyan);
+      color: var(--cyan); width: 46px; height: 46px; border-radius: 50%;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; transition: all 0.2s ease; z-index: 10;
+      box-shadow: 0 0 15px rgba(0, 243, 255, 0.3);
     }
-
-    .proj-cat-badge {
-      position: absolute;
-      top: 14px; right: 14px;
-      background: rgba(232,168,56,0.15);
-      border: 1px solid rgba(232,168,56,0.3);
-      color: var(--gold);
-      font-size: 0.72rem;
-      font-weight: 600;
-      padding: 4px 12px;
-      border-radius: 40px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+    .lightbox-nav-btn:hover {
+      background: var(--cyan); color: #000; box-shadow: 0 0 25px var(--cyan-glow);
+      transform: translateY(-50%) scale(1.1);
     }
+    .lightbox-nav-prev { left: 14px; }
+    .lightbox-nav-next { right: 14px; }
 
-    .proj-body {
-      padding: 24px;
+    .lightbox-thumbs {
+      display: flex; gap: 12px; overflow-x: auto; padding: 6px 2px 10px 2px; margin-bottom: 20px;
+      scrollbar-width: thin; scrollbar-color: var(--cyan) transparent;
     }
-
-    .proj-body h3 {
-      font-family: var(--font-head);
-      font-size: 1.15rem;
-      margin-bottom: 8px;
+    .lightbox-thumb {
+      width: 110px; height: 70px; border-radius: 10px; overflow: hidden;
+      border: 2px solid rgba(255, 255, 255, 0.15); cursor: pointer; flex-shrink: 0;
+      opacity: 0.55; transition: all 0.25s ease; position: relative; background: #000;
     }
-
-    .proj-body p {
-      color: var(--muted);
-      font-size: 0.9rem;
-      line-height: 1.5;
-      margin-bottom: 16px;
+    .lightbox-thumb.active, .lightbox-thumb:hover {
+      border-color: var(--gold); opacity: 1; transform: translateY(-3px);
+      box-shadow: 0 0 20px var(--gold-glow);
     }
+    .lightbox-thumb img { width: 100%; height: 100%; object-fit: cover; }
 
-    .proj-tags {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
+    /* CONTACT & FOOTER */
+    #contact { background: var(--bg-surface); z-index: 2; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 50px; }
+    .contact-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 36px; }
 
-    .proj-tag {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border);
-      padding: 3px 12px;
-      border-radius: 40px;
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
+    footer { background: #040508; border-top: 1px solid var(--border-color); padding: 30px 24px; text-align: center; }
 
-    /* ===========================
-       TESTIMONIALS
-    =========================== */
-    .testi-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-    }
-
-    .testi-card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 32px 28px;
-    }
-
-    .testi-stars {
-      color: var(--gold);
-      font-size: 0.9rem;
-      letter-spacing: 2px;
-      margin-bottom: 16px;
-    }
-
-    .testi-card p {
-      color: var(--muted);
-      font-size: 0.95rem;
-      line-height: 1.7;
-      margin-bottom: 24px;
-      font-style: italic;
-    }
-
-    .testi-author {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .testi-avatar {
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--gold), #c47f10);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-head);
-      font-weight: 800;
-      color: #0C0D10;
-      font-size: 1rem;
-      flex-shrink: 0;
-    }
-
-    .testi-name {
-      font-family: var(--font-head);
-      font-size: 0.95rem;
-      font-weight: 700;
-    }
-
-    .testi-role {
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    /* ===========================
-       CONTACT
-    =========================== */
-    #contact { background: var(--bg); }
-
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.4fr;
-      gap: 50px;
-    }
-
-    .contact-aside h3 {
-      font-family: var(--font-head);
-      font-size: 1.6rem;
-      margin-bottom: 16px;
-    }
-
-    .contact-aside p {
-      color: var(--muted);
-      line-height: 1.7;
-      margin-bottom: 36px;
-      font-size: 0.95rem;
-    }
-
-    .contact-links {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-    }
-
-    .cl-item {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .cl-icon {
-      width: 48px; height: 48px;
-      background: rgba(232,168,56,0.1);
-      border: 1px solid rgba(232,168,56,0.2);
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      color: var(--gold);
-      flex-shrink: 0;
-      transition: background 0.2s;
-    }
-
-    .cl-item:hover .cl-icon {
-      background: rgba(232,168,56,0.2);
-    }
-
-    .cl-label {
-      font-size: 0.78rem;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .cl-value {
-      font-size: 0.95rem;
-      font-weight: 500;
-    }
-
-    /* Socials */
-    .social-row {
-      display: flex;
-      gap: 12px;
-      margin-top: 32px;
-    }
-
-    .social-btn {
-      width: 42px; height: 42px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--muted);
-      font-size: 1rem;
-      transition: border-color 0.2s, color 0.2s;
-    }
-
-    .social-btn:hover {
-      border-color: var(--gold);
-      color: var(--gold);
-    }
-
-    /* Form */
-    .contact-form {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 28px;
-      padding: 40px 36px;
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .form-group {
-      margin-bottom: 18px;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 0.82rem;
-      color: var(--muted);
-      margin-bottom: 8px;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 14px 18px;
-      color: var(--white);
-      font-family: var(--font-body);
-      font-size: 0.95rem;
-      transition: border-color 0.2s;
-      resize: none;
-    }
-
-    .form-group input:focus,
-    .form-group textarea:focus {
-      outline: none;
-      border-color: var(--gold);
-    }
-
-    .form-group input::placeholder,
-    .form-group textarea::placeholder {
-      color: #3E434F;
-    }
-
-    /* ===========================
-       WHATSAPP FLOAT
-    =========================== */
-    .whatsapp-float {
-      position: fixed;
-      bottom: 32px;
-      right: 32px;
-      z-index: 500;
-      width: 58px; height: 58px;
-      background: #25D366;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.7rem;
-      color: white;
-      box-shadow: 0 8px 30px rgba(37,211,102,0.45);
-      transition: transform 0.25s, box-shadow 0.25s;
-      animation: pulse-wa 2.5s infinite;
-    }
-
-    .whatsapp-float:hover {
-      transform: scale(1.12);
-      box-shadow: 0 12px 40px rgba(37,211,102,0.6);
-    }
-
-    @keyframes pulse-wa {
-      0%, 100% { box-shadow: 0 8px 30px rgba(37,211,102,0.45); }
-      50% { box-shadow: 0 8px 40px rgba(37,211,102,0.7), 0 0 0 10px rgba(37,211,102,0.08); }
-    }
-
-    /* ===========================
-       FOOTER
-    =========================== */
-    footer {
-      background: #07080B;
-      border-top: 1px solid var(--border);
-      padding: 40px 28px;
-      text-align: center;
-    }
-
-    footer p {
-      color: var(--muted);
-      font-size: 0.88rem;
-    }
-
-    footer strong { color: var(--gold); }
-
-    /* ===========================
-       DIVIDER
-    =========================== */
-    .divider {
-      width: 60px; height: 3px;
-      background: var(--gold);
-      border-radius: 3px;
-      margin: 16px 0 0;
-    }
-
-    /* ===========================
-       ANIMATIONS
-    =========================== */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(32px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-
-    .fade-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* stagger children */
-    .fade-up:nth-child(2) { transition-delay: 0.1s; }
-    .fade-up:nth-child(3) { transition-delay: 0.2s; }
-    .fade-up:nth-child(4) { transition-delay: 0.3s; }
-
-    /* ===========================
-       RESPONSIVE
-    =========================== */
-    @media (max-width: 1000px) {
-      .hero-inner { grid-template-columns: 1fr; }
-      .hero-photo-wrap { display: none; }
+    @media(max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .portrait-card { display: none; }
       .about-grid { grid-template-columns: 1fr; }
-      .services-grid { grid-template-columns: 1fr 1fr; }
       .contact-grid { grid-template-columns: 1fr; }
-    }
-
-    @media (max-width: 768px) {
-      section { padding: 80px 0; }
-      .nav-links { display: none; }
-      .nav-links.open {
-        display: flex;
-        flex-direction: column;
-        position: fixed;
-        top: 70px; left: 0; right: 0;
-        background: rgba(12,13,16,0.97);
-        padding: 30px 28px;
-        gap: 1.5rem;
-        border-bottom: 1px solid var(--border);
-        backdrop-filter: blur(20px);
-      }
-      .hamburger { display: flex; }
-      .nav-cta { display: none; }
-      .services-grid { grid-template-columns: 1fr; }
-      .form-row { grid-template-columns: 1fr; }
-    }
-
-    @media (max-width: 480px) {
-      .hero h1 { font-size: 2.4rem; }
-      .hero-stats { gap: 24px; }
-      .proj-grid { grid-template-columns: 1fr; }
+      .xp-container { display: none; }
     }
   </style>
 </head>
 <body>
 
-<!-- WhatsApp Float Button -->
-<a class="whatsapp-float" href="https://wa.me/22353417919" target="_blank" rel="noopener noreferrer" title="Contactez-moi sur WhatsApp">
-  <i class="fab fa-whatsapp"></i>
-</a>
+  <!-- Canvas -->
+  <canvas id="cyberCanvas"></canvas>
+  <div class="grid-overlay"></div>
+  <div class="cursor-glow" id="cursorGlow"></div>
 
-<!-- ======================== NAVBAR ======================== -->
-<nav class="navbar" id="navbar">
-  <div class="nav-logo">Amadou<span>.</span></div>
-  <ul class="nav-links" id="navLinks">
-    <li><a href="#hero" class="nav-link">Accueil</a></li>
-    <li><a href="#about" class="nav-link">À propos</a></li>
-    <li><a href="#services" class="nav-link">Services</a></li>
-    <li><a href="#experience" class="nav-link">Expérience</a></li>
-    <li><a href="#projects" class="nav-link">Projets</a></li>
-    <li><a href="#contact" class="nav-link">Contact</a></li>
-    <li><a href="https://wa.me/22353417919" target="_blank" class="nav-cta"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
-  </ul>
-  <button class="hamburger" id="hamburger" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-
-<!-- ======================== HERO ======================== -->
-<section id="hero" class="hero">
-  <div class="container">
-    <div class="hero-inner">
-      <div class="hero-content">
-        <span class="hero-tag"><i class="fas fa-map-marker-alt"></i> Bamako, Mali · Disponible</span>
-        <h1>Développeur<br><em>Full-Stack</em><br>& Créatif</h1>
-        <p class="hero-desc">
-          Je m'appelle <strong>Amadou Maiga</strong>. Je transforme vos idées en expériences digitales modernes — sites web, applications et solutions sur mesure.
-        </p>
-        <div class="hero-btns">
-          <a href="#projects" class="btn-gold"><i class="fas fa-eye"></i> Voir mes projets</a>
-          <a href="assets/cv.pdf" download="CV_Amadou_Maiga.pdf" class="btn-ghost"><i class="fas fa-download"></i> Télécharger CV</a>
-        </div>
-        <div class="hero-stats">
-          <div>
-            <div class="stat-num">3+</div>
-            <div class="stat-label">Ans d'expérience</div>
-          </div>
-          <div>
-            <div class="stat-num">15+</div>
-            <div class="stat-label">Projets livrés</div>
-          </div>
-          <div>
-            <div class="stat-num">100%</div>
-            <div class="stat-label">Clients satisfaits</div>
-          </div>
-        </div>
+  <!-- PLAYER HUD BAR -->
+  <div class="player-hud-bar">
+    <div class="hud-player-info">
+      <div class="player-avatar-mini"></div>
+      <div class="player-name-tag">
+        AMADOU MAIGA <span class="lvl-badge">LVL 99 FULL STACK ARCHITECT</span>
       </div>
-      <div class="hero-photo-wrap fade-up">
-        <img src="assets/amadou.jpg" alt="Amadou Maiga — Développeur Web">
-        <div class="hero-badge-float">
-          <div class="badge-icon"><i class="fas fa-code"></i></div>
-          <div class="badge-text">
-            <strong>Full-Stack Dev</strong>
-            <span>Angular · Laravel · WordPress</span>
-          </div>
-        </div>
+    </div>
+
+    <div class="xp-container">
+      <span class="xp-label">XP: <span id="xpVal">19,500</span> / 20,000</span>
+      <div class="xp-bar-bg">
+        <div class="xp-bar-fill" id="xpBarFill" style="width: 97.5%;"></div>
+      </div>
+    </div>
+
+    <div class="hud-achievements" style="display:flex; align-items:center; gap:12px;">
+      <button onclick="openWelcomeModal()" style="background:linear-gradient(135deg, var(--gold), #ffaa00); border:none; padding:5px 14px; border-radius:20px; font-weight:800; font-size:0.75rem; color:#000; cursor:pointer; display:flex; align-items:center; gap:6px; box-shadow:0 0 15px var(--gold-glow);">
+        <i class="fas fa-gamepad"></i> Gagner des Points Question
+      </button>
+      <div class="trophy-badge">
+        <i class="fas fa-trophy"></i> <span id="trophyCount">5 / 5 UNLOCKED</span>
       </div>
     </div>
   </div>
-</section>
 
-<!-- ======================== ABOUT ======================== -->
-<section id="about">
-  <div class="container">
-    <div class="about-grid">
-      <div class="about-text fade-up">
-        <span class="sec-label">À propos</span>
-        <h2 class="sec-title">Passion, code<br>& innovation</h2>
-        <div class="divider"></div>
-        <br>
-        <p>
-          Développeur web passionné avec une formation en informatique et télécommunications, je possède plusieurs expériences dans le développement d'applications web, la gestion des réseaux et la transformation digitale.
-        </p>
-        <p>
-          Mon approche allie design centré sur l'utilisateur et performance technique pour livrer des solutions qui font vraiment la différence.
-        </p>
-        <div class="about-checks">
-          <div class="check-item"><i class="fas fa-circle-check"></i> Disponible pour freelance &amp; missions</div>
-          <div class="check-item"><i class="fas fa-circle-check"></i> +15 projets livrés avec succès</div>
-          <div class="check-item"><i class="fas fa-circle-check"></i> Stack moderne : Angular, Laravel, WordPress, Spring</div>
-          <div class="check-item"><i class="fas fa-circle-check"></i> Maîtrise de la gestion de réseaux</div>
-        </div>
-        <a href="assets/cv.pdf" download="CV_Amadou_Maiga.pdf" class="btn-gold" style="margin-top:10px;">
-          <i class="fas fa-download"></i> Télécharger mon CV
-        </a>
-      </div>
-      <div class="about-aside fade-up">
-        <h3>Compétences clés</h3>
-        <div class="skill-bar-item">
-          <div class="skill-bar-top"><span>WordPress</span><span>95%</span></div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:0.95"></div></div>
-        </div>
-        <div class="skill-bar-item">
-          <div class="skill-bar-top"><span>HTML5 / CSS3</span><span>90%</span></div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:0.90"></div></div>
-        </div>
-        <div class="skill-bar-item">
-          <div class="skill-bar-top"><span>Angular</span><span>85%</span></div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:0.85"></div></div>
-        </div>
-        <div class="skill-bar-item">
-          <div class="skill-bar-top"><span>JavaScript</span><span>85%</span></div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:0.85"></div></div>
-        </div>
-        <div class="skill-bar-item">
-          <div class="skill-bar-top"><span>PHP / Laravel</span><span>75%</span></div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:0.75"></div></div>
-        </div>
-        <div class="skill-bar-item">
-          <div class="skill-bar-top"><span>Figma</span><span>80%</span></div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:0.80"></div></div>
-        </div>
-        <div class="skill-bar-item">
-          <div class="skill-bar-top"><span>MySQL</span><span>80%</span></div>
-          <div class="skill-bar-bg"><div class="skill-bar-fill" style="--w:0.80"></div></div>
-        </div>
-      </div>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="#hero" class="nav-logo">
+      <div class="logo-box">MC</div>
+      MAIGA<span>.CONSULTING</span>
+    </a>
+    
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#hero" class="nav-link active">Accueil</a></li>
+      <li><a href="#about" class="nav-link">À propos &amp; Vision</a></li>
+      <li><a href="#quiz-game" class="nav-link" style="color:var(--cyan); font-weight:800;"><i class="fas fa-gamepad"></i> Quiz Tech</a></li>
+      <li><a href="#screenshots-gallery" class="nav-link" style="color:var(--gold); font-weight:800;"><i class="fas fa-images"></i> Quelques Captures</a></li>
+      <li><a href="#experience" class="nav-link">Parcours</a></li>
+      <li><a href="#projects" class="nav-link">Projets</a></li>
+      <li><a href="#contact" class="nav-link">Contact</a></li>
+      <li><a href="https://wa.me/22353417919" target="_blank" class="nav-cta"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+    </ul>
+
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </nav>
+
+  <!-- TOAST -->
+  <div class="achievement-toast" id="achievementToast">
+    <div class="toast-icon"><i class="fas fa-award"></i></div>
+    <div>
+      <h4 style="font-family:var(--font-pixel); font-size:0.65rem; color:var(--gold);">🏆 UNLOCKED ACHIEVEMENT!</h4>
+      <p id="toastTitle" style="color:#fff; font-size:0.9rem;">Profil Full Stack Réaligné (+500 XP)</p>
     </div>
   </div>
-</section>
 
-<!-- ======================== SERVICES ======================== -->
-<section id="services">
-  <div class="container">
-    <div class="sec-header fade-up">
-      <span class="sec-label">Ce que je fais</span>
-      <h2 class="sec-title">Services proposés</h2>
-      <div class="divider"></div>
-    </div>
-    <div class="services-grid">
-      <div class="srv-card fade-up">
-        <div class="srv-icon"><i class="fas fa-palette"></i></div>
-        <h3>Identité de marque</h3>
-        <p>Création de logos, chartes graphiques et supports visuels uniques pour vous démarquer de la concurrence.</p>
-      </div>
-      <div class="srv-card fade-up">
-        <div class="srv-icon"><i class="fas fa-laptop-code"></i></div>
-        <h3>Sites web modernes</h3>
-        <p>Sites responsive, rapides et optimisés SEO, développés sur mesure ou avec CMS (WordPress).</p>
-      </div>
-      <div class="srv-card fade-up">
-        <div class="srv-icon"><i class="fas fa-layer-group"></i></div>
-        <h3>Applications web</h3>
-        <p>Applications intuitives, dashboards et solutions métier avec une expérience utilisateur fluide.</p>
-      </div>
-      <div class="srv-card fade-up">
-        <div class="srv-icon"><i class="fas fa-store"></i></div>
-        <h3>Gestion de boutique</h3>
-        <p>Systèmes complets de gestion de stock, ventes, clients et facturation pour commerces et boutiques.</p>
-      </div>
-      <div class="srv-card fade-up">
-        <div class="srv-icon"><i class="fas fa-network-wired"></i></div>
-        <h3>Réseaux & Infra</h3>
-        <p>Gestion de réseaux informatiques, sécurité des systèmes et transformation digitale d'entreprises.</p>
-      </div>
-      <div class="srv-card fade-up">
-        <div class="srv-icon"><i class="fas fa-mobile-screen"></i></div>
-        <h3>Applications mobiles</h3>
-        <p>Développement d'applications mobiles cross-platform avec Ionic pour iOS et Android.</p>
-      </div>
-    </div>
-  </div>
-</section>
+  <!-- HERO SECTION -->
+  <section id="hero" class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <div class="hero-tag">
+            <i class="fas fa-code"></i> DÉVELOPPEUR FULL STACK · INGÉNIEUR LOGICIEL
+          </div>
 
-<!-- ======================== EXPERIENCE ======================== -->
-<section id="experience">
-  <div class="container">
-    <div class="sec-header fade-up">
-      <span class="sec-label">Parcours</span>
-      <h2 class="sec-title">Expérience &amp;<br>Formation</h2>
-      <div class="divider"></div>
-    </div>
-    <div class="exp-timeline">
-      <div class="exp-item fade-up">
-        <div class="exp-date">Nov 2023 — Sep 2024</div>
-        <h3>Développeur Web &amp; Mobile</h3>
-        <div class="exp-company">Africant Development — ACI 2000, Bamako</div>
-        <ul>
-          <li>Création de sites web et applications web sur mesure</li>
-          <li>Transformation digitale et gestion des réseaux sociaux</li>
-          <li>Angular, Ionic, Symfony, Laravel</li>
-          <li>Gestion de la sécurité des applications et des systèmes</li>
-        </ul>
-      </div>
-      <div class="exp-item fade-up">
-        <div class="exp-date">Oct 2022 — Août 2023</div>
-        <h3>Développeur Web</h3>
-        <div class="exp-company">Wagadou Soft — Boulkasoumbougou</div>
-        <ul>
-          <li>Développement front-end (HTML, CSS) et back-end (PHP, Laravel, WordPress)</li>
-          <li>Gestion des réseaux et des serveurs</li>
-          <li>Solutions web sur mesure pour des clients variés</li>
-        </ul>
-      </div>
-      <div class="exp-item fade-up">
-        <div class="exp-date">Avril 2021</div>
-        <h3>Stagiaire Développeur Web</h3>
-        <div class="exp-company">Global Business Technology — Boulkasoumbougou</div>
-        <ul>
-          <li>Développement web et gestion de réseaux</li>
-          <li>Création de sites web et infrastructure réseau</li>
-        </ul>
-      </div>
-      <div class="exp-item fade-up">
-        <div class="exp-date">Jan 2021 — Sep 2023</div>
-        <h3>Licence en Informatique &amp; Télécommunications</h3>
-        <div class="exp-company">Université ERPIE — Bamako</div>
-        <ul>
-          <li>Spécialisation développement web &amp; réseaux</li>
-          <li>Formation sur les technologies modernes du web</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
+          <h1 class="hero-title">
+            Amadou Maiga<br>
+            <span class="gradient-text">Développeur Full Stack</span>
+          </h1>
 
-<!-- ======================== SKILLS ======================== -->
-<section id="skills">
-  <div class="container">
-    <div class="sec-header fade-up">
-      <span class="sec-label">Expertise technique</span>
-      <h2 class="sec-title">Stack &amp; Technologies</h2>
-      <div class="divider"></div>
-    </div>
-    <div class="tech-grid">
-      <div class="tech-item fade-up"><i class="fab fa-html5"></i><span>HTML5</span></div>
-      <div class="tech-item fade-up"><i class="fab fa-css3-alt"></i><span>CSS3</span></div>
-      <div class="tech-item fade-up"><i class="fab fa-js"></i><span>JavaScript</span></div>
-      <div class="tech-item fade-up"><i class="fab fa-angular"></i><span>Angular</span></div>
-      <div class="tech-item fade-up"><i class="fab fa-react"></i><span>React</span></div>
-      <div class="tech-item fade-up"><i class="fab fa-php"></i><span>PHP</span></div>
-      <div class="tech-item fade-up"><i class="fab fa-laravel"></i><span>Laravel</span></div>
-      <div class="tech-item fade-up"><i class="fab fa-symfony"></i><span>Symfony</span></div>
-      <div class="tech-item fade-up"><i class="fab fa-wordpress"></i><span>WordPress</span></div>
-      <div class="tech-item fade-up"><i class="fab fa-node-js"></i><span>Node.js</span></div>
-      <div class="tech-item fade-up"><i class="fas fa-database"></i><span>MySQL</span></div>
-      <div class="tech-item fade-up"><i class="fab fa-git-alt"></i><span>Git</span></div>
-      <div class="tech-item fade-up"><i class="fab fa-figma"></i><span>Figma</span></div>
-      <div class="tech-item fade-up"><i class="fab fa-bootstrap"></i><span>Bootstrap</span></div>
-    </div>
-  </div>
-</section>
+          <div class="typing-box">
+            <span>&gt; </span>
+            <span id="typingText"></span>
+          </div>
 
-<!-- ======================== PROJECTS ======================== -->
-<section id="projects">
-  <div class="container">
-    <div class="sec-header fade-up">
-      <span class="sec-label">Réalisations</span>
-      <h2 class="sec-title">Projets récents</h2>
-      <div class="divider"></div>
-    </div>
-    <div class="proj-filter fade-up" id="filterBtns">
-      <button class="active" data-f="all">Tous</button>
-      <button data-f="web">Sites web</button>
-      <button data-f="app">Applications</button>
-      <button data-f="gestion">Gestion</button>
-    </div>
-    <div class="proj-grid" id="projGrid"></div>
-  </div>
-</section>
+          <p class="hero-desc">
+            Développeur Full Stack &amp; Fondateur de <strong>Maiga Consulting</strong>. Spécialisé dans la conception d'applications web et mobiles haute performance (<strong>Spring Boot, Angular, Laravel, Ionic, React &amp; Machine Learning</strong>).
+          </p>
 
-<!-- ======================== TESTIMONIALS ======================== -->
-<section id="testimonials" style="background: var(--bg);">
-  <div class="container">
-    <div class="sec-header fade-up" style="text-align:center;">
-      <span class="sec-label">Témoignages</span>
-      <h2 class="sec-title">Ce que disent mes clients</h2>
-      <div class="divider" style="margin:16px auto 0;"></div>
-    </div>
-    <div class="testi-grid">
-      <div class="testi-card fade-up">
-        <div class="testi-stars">★★★★★</div>
-        <p>"Amadou a donné vie à mon projet avec une créativité rare. Site rapide, design élégant — un vrai partenaire digital !"</p>
-        <div class="testi-author">
-          <div class="testi-avatar">AD</div>
-          <div>
-            <div class="testi-name">Aminata Diallo</div>
-            <div class="testi-role">CEO — Bright Future</div>
+          <div class="hero-actions">
+            <a href="#projects" class="btn-cyber-gold" onclick="triggerAchievement('Projets Full Stack Explorés!', 500)">
+              <i class="fas fa-rocket"></i> Explorer mes Projets Full Stack
+            </a>
+            <a href="https://mg-consulting.site" target="_blank" class="btn-cyber-cyan">
+              <i class="fas fa-globe"></i> Maiga Consulting (mg-consulting.site)
+            </a>
           </div>
         </div>
-      </div>
-      <div class="testi-card fade-up">
-        <div class="testi-stars">★★★★★</div>
-        <p>"Une écoute parfaite et des livraisons dans les délais. Je recommande pour tout projet digital professionnel."</p>
-        <div class="testi-author">
-          <div class="testi-avatar">MT</div>
-          <div>
-            <div class="testi-name">Mamadou Traoré</div>
-            <div class="testi-role">Fondateur — Avit Web</div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-card fade-up">
-        <div class="testi-stars">★★★★★</div>
-        <p>"Application de gestion de boutique intuitive — mon commerce a gagné énormément en efficacité. Merci Amadou !"</p>
-        <div class="testi-author">
-          <div class="testi-avatar">FC</div>
-          <div>
-            <div class="testi-name">Fatoumata Cissé</div>
-            <div class="testi-role">Directrice — Groupe AWD</div>
-          </div>
-        </div>
-      </div>
-      <div class="testi-card fade-up">
-        <div class="testi-stars">★★★★★</div>
-        <p>"Un professionnalisme exemplaire. Le système de gestion de pharmacie est robuste et facile à utiliser au quotidien."</p>
-        <div class="testi-author">
-          <div class="testi-avatar">IK</div>
-          <div>
-            <div class="testi-name">Ibrahim Keïta</div>
-            <div class="testi-role">Pharmacien — Bamako</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- ======================== CONTACT ======================== -->
-<section id="contact">
-  <div class="container">
-    <div class="sec-header fade-up">
-      <span class="sec-label">Contact</span>
-      <h2 class="sec-title">Travaillons ensemble</h2>
-      <div class="divider"></div>
-    </div>
-    <div class="contact-grid">
-      <div class="contact-aside fade-up">
-        <h3>Parlons de votre projet !</h3>
-        <p>Disponible pour des missions freelance, des collaborations et des projets en entreprise. N'hésitez pas à me contacter.</p>
-        <div class="contact-links">
-          <a class="cl-item" href="mailto:doumaiga3@gmail.com">
-            <div class="cl-icon"><i class="fas fa-envelope"></i></div>
-            <div>
-              <div class="cl-label">Email</div>
-              <div class="cl-value">doumaiga3@gmail.com</div>
-            </div>
-          </a>
-          <a class="cl-item" href="tel:+22391613489">
-            <div class="cl-icon"><i class="fas fa-phone"></i></div>
-            <div>
-              <div class="cl-label">Téléphone</div>
-              <div class="cl-value">+223 91 61 34 89</div>
-            </div>
-          </a>
-          <a class="cl-item" href="https://wa.me/22353417919" target="_blank">
-            <div class="cl-icon"><i class="fab fa-whatsapp"></i></div>
-            <div>
-              <div class="cl-label">WhatsApp</div>
-              <div class="cl-value">+223 53 41 79 19</div>
-            </div>
-          </a>
-          <div class="cl-item">
-            <div class="cl-icon"><i class="fas fa-location-dot"></i></div>
-            <div>
-              <div class="cl-label">Localisation</div>
-              <div class="cl-value">Bamako, Diatoula — Mali</div>
+        <div style="display:flex; justify-content:center;">
+          <div class="portrait-card">
+            <img src="assets/amadou.jpg" alt="Amadou Maiga" class="portrait-img">
+            <div class="portrait-company-badge">
+              <div>
+                <strong>Amadou Maiga</strong>
+                <p style="font-size:0.75rem; color:var(--text-muted);">Full Stack Developer &amp; Entrepreneur</p>
+              </div>
+              <span>ONLINE</span>
             </div>
           </div>
         </div>
-        <div class="social-row">
-          <a class="social-btn" href="https://github.com/diadiemaiga9161" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-          <a class="social-btn" href="https://linkedin.com/in/amadou-maiga" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-          <a class="social-btn" href="https://wa.me/22353417919" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-          <a class="social-btn" href="mailto:doumaiga3@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
-        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT & MAIGA CONSULTING -->
+  <section id="about">
+    <div class="container">
+      <div class="sec-header">
+        <span class="sec-subtitle">// 01. EXPERTISE FULL STACK &amp; VISION</span>
+        <h2 class="sec-title">À propos d'Amadou Maiga &amp; <span>Maiga Consulting</span></h2>
+        <div class="cyber-line-divider"></div>
       </div>
 
-      <div class="contact-form fade-up">
-        <div class="form-row">
-          <div class="form-group">
-            <label>Prénom</label>
-            <input type="text" placeholder="Votre prénom">
+      <div class="about-grid">
+        <div class="about-text">
+          <p>
+            Je suis <strong>Amadou Maiga</strong>, développeur Full Stack et ingénieur logiciel passionné par l'innovation et la transformation numérique. Je conçois et développe des applications web et mobiles sur-mesure, performantes et sécurisées.
+          </p>
+          <p>
+            <strong>Mon Expertise Full Stack :</strong> Je maîtrise l'ensemble de la chaîne de valeur d'une application : du Backend robuste (Spring Boot, Laravel, REST APIs multi-tenant, architecture microservices, MySQL) aux interfaces Frontend & Mobile réactives (Angular, React, Ionic, Flutter).
+          </p>
+          <p>
+            En tant qu'entrepreneur, j'ai fondé <strong>Maiga Consulting</strong> — dont le site vitrine officiel (<a href="https://mg-consulting.site" target="_blank" style="color:var(--cyan);">mg-consulting.site</a>) est réalisé sous WordPress pour la présentation rapide des offres — afin de proposer des solutions numériques complètes aux entreprises.
+          </p>
+        </div>
+
+        <div>
+          <div class="maiga-consulting-card">
+            <h3><i class="fas fa-building"></i> Maiga Consulting</h3>
+            <p>
+              Entreprise spécialisée dans le développement d'applications web et mobiles sur-mesure, la conception de logiciels métiers et l'accompagnement à la transformation digitale.
+            </p>
+            <a href="https://mg-consulting.site" target="_blank" class="maiga-consulting-btn">
+              <i class="fas fa-external-link-alt"></i> Visiter mg-consulting.site
+            </a>
           </div>
-          <div class="form-group">
-            <label>Nom</label>
-            <input type="text" placeholder="Votre nom">
+
+          <div class="odc-card">
+            <div class="odc-icon"><i class="fas fa-brain"></i></div>
+            <div class="odc-info">
+              <h4>Initiation au Machine Learning</h4>
+              <p>Orange Digital Center — Formation pratique à l'apprentissage automatique et IA.</p>
+            </div>
           </div>
         </div>
-        <div class="form-group">
-          <label>Email</label>
-          <input type="email" placeholder="votre@email.com">
+      </div>
+    </div>
+  </section>
+
+  <!-- INTERACTIVE TECH QUIZ GAME SECTION -->
+  <section id="quiz-game">
+    <div class="container">
+      <div class="sec-header">
+        <span class="sec-subtitle">// MINI-JEU INTERACTIF · APPRENDRE EN S'AMUSANT</span>
+        <h2 class="sec-title">Le Grand <span>Cyber Quiz Tech !</span></h2>
+        <div class="cyber-line-divider"></div>
+      </div>
+
+      <div class="quiz-box">
+        <div class="quiz-header">
+          <span class="quiz-step-tag" id="quizStepTag">QUESTION 1 / 5</span>
+          <span class="quiz-score-tag">SCORE XP: <span id="quizScore">0</span> XP</span>
         </div>
-        <div class="form-group">
-          <label>Sujet</label>
-          <input type="text" placeholder="Objet de votre demande">
-        </div>
-        <div class="form-group">
-          <label>Message</label>
-          <textarea rows="5" placeholder="Décrivez votre projet..."></textarea>
-        </div>
-        <button class="btn-gold" style="width:100%; justify-content:center;" onclick="handleSubmit()">
-          Envoyer le message <i class="fas fa-paper-plane"></i>
+
+        <div class="quiz-question" id="quizQuestion">Chargement de la question...</div>
+
+        <div class="quiz-options" id="quizOptions"></div>
+
+        <div class="quiz-explanation" id="quizExplanation"></div>
+
+        <button class="quiz-next-btn" id="quizNextBtn" onclick="nextQuestion()">
+          Question Suivante <i class="fas fa-arrow-right"></i>
         </button>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ======================== FOOTER ======================== -->
-<footer>
-  <p>© 2025 <strong>Amadou Maiga</strong> — Développeur Web Full-Stack · Bamako, Mali</p>
-  <p style="margin-top:8px;">
-    <a href="mailto:doumaiga3@gmail.com" style="color:var(--gold);">doumaiga3@gmail.com</a>
-    &nbsp;·&nbsp;
-    <a href="https://wa.me/22353417919" target="_blank" style="color:var(--gold);">WhatsApp</a>
-    &nbsp;·&nbsp;
-    <a href="https://github.com/diadiemaiga9161" target="_blank" style="color:var(--gold);">GitHub</a>
-  </p>
-</footer>
-
-<script>
-/* ===== PROJECTS DATA ===== */
-const projects = [
-  {
-    name: "Gestion de Boutique",
-    cat: "gestion",
-    catLabel: "Gestion",
-    icon: "fas fa-store",
-    desc: "Système complet de gestion de boutique : stock, ventes, clients, facturation et rapports.",
-    tags: ["Angular", "Laravel", "MySQL"]
-  },
-  {
-    name: "Gestion de Pressing",
-    cat: "gestion",
-    catLabel: "Gestion",
-    icon: "fas fa-shirt",
-    desc: "Application de gestion pour pressing : dépôts, commandes, retours et suivi client en temps réel.",
-    tags: ["Angular", "Laravel", "MySQL"]
-  },
-  {
-    name: "Gestion de Pharmacie",
-    cat: "gestion",
-    catLabel: "Gestion",
-    icon: "fas fa-pills",
-    desc: "Logiciel de gestion de pharmacie : stocks de médicaments, ordonnances, alertes de péremption.",
-    tags: ["Angular", "Symfony", "MySQL"]
-  },
-  {
-    name: "Avit Web",
-    cat: "web",
-    catLabel: "Site web",
-    icon: "fas fa-globe",
-    desc: "Site corporate pour cabinet conseil en informatique — design moderne et performance optimisée.",
-    tags: ["WordPress", "HTML", "CSS"]
-  },
-  {
-    name: "Bright Future",
-    cat: "web",
-    catLabel: "Site web",
-    icon: "fas fa-graduation-cap",
-    desc: "Plateforme de formation en ligne avec système d'inscription et gestion de contenu.",
-    tags: ["WordPress", "PHP"]
-  },
-  {
-    name: "PCRSS",
-    cat: "web",
-    catLabel: "Site web",
-    icon: "fas fa-building",
-    desc: "Site institutionnel pour organisation — présentation claire et navigation intuitive.",
-    tags: ["WordPress", "CSS"]
-  },
-  {
-    name: "Wagadou Toner",
-    cat: "web",
-    catLabel: "Site web",
-    icon: "fas fa-print",
-    desc: "E-commerce pour la vente d'imprimantes et consommables informatiques.",
-    tags: ["WordPress", "WooCommerce"]
-  },
-  {
-    name: "Rendez-Vous Pro",
-    cat: "app",
-    catLabel: "Application",
-    icon: "fas fa-calendar-check",
-    desc: "Application de prise de rendez-vous professionnels — planning intelligent et notifications.",
-    tags: ["Angular", "Laravel", "MySQL"]
-  },
-  {
-    name: "Audit Expert",
-    cat: "app",
-    catLabel: "Application",
-    icon: "fas fa-chart-bar",
-    desc: "Solution d'audit pour entreprises avec tableaux de bord analytiques et rapports PDF.",
-    tags: ["Angular", "Spring Boot", "MySQL"]
-  }
-];
-
-function renderProjects(filter = "all") {
-  const grid = document.getElementById('projGrid');
-  const list = filter === "all" ? projects : projects.filter(p => p.cat === filter);
-  grid.innerHTML = list.map(p => `
-    <div class="proj-card fade-up">
-      <div class="proj-thumb">
-        <i class="${p.icon} proj-thumb-icon"></i>
-        <span class="proj-cat-badge">${p.catLabel}</span>
+  <!-- REAL SCREENSHOTS GALLERY SECTION -->
+  <section id="screenshots-gallery">
+    <div class="container">
+      <div class="sec-header">
+        <span class="sec-subtitle">// SÉLECTION DE PROJETS EN IMAGES RÉELLES</span>
+        <h2 class="sec-title">Aperçu de <span>Quelques Captures Réelles</span></h2>
+        <div class="cyber-line-divider"></div>
       </div>
-      <div class="proj-body">
-        <h3>${p.name}</h3>
-        <p>${p.desc}</p>
-        <div class="proj-tags">
-          ${p.tags.map(t => `<span class="proj-tag">${t}</span>`).join('')}
+
+      <div class="gallery-grid">
+        <!-- Item 1: Ges Boutique Mobile Ventes -->
+        <div class="gallery-item-card" onclick="openImageModal('assets/screenshots/ges-boutique-ventes.png', 'Ges Boutique App Mobile — Chiffre d\'Affaires & Suivi des Ventes')">
+          <div class="gallery-img-wrap">
+            <img src="assets/screenshots/ges-boutique-ventes.png" alt="Ges Boutique Mobile Ventes">
+            <div class="gallery-overlay-badge">
+              <strong>Ges Boutique — Mobile Ventes</strong>
+              <span>CHIFRES &amp; CA</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 2: Ges Boutique Mobile Stock -->
+        <div class="gallery-item-card" onclick="openImageModal('assets/screenshots/ges-boutique-stock.png', 'Ges Boutique App Mobile — Valeur du Stock & Produits')">
+          <div class="gallery-img-wrap">
+            <img src="assets/screenshots/ges-boutique-stock.png" alt="Ges Boutique Stock">
+            <div class="gallery-overlay-badge">
+              <strong>Ges Boutique — Mobile Stock</strong>
+              <span>VALEUR STOCK</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3: GES-Pharma Dashboard -->
+        <div class="gallery-item-card" onclick="openImageModal('assets/screenshots/ges-pharma-dash.png', 'GES-Pharma — Dashboard de Gestion de Stock & Ventes Pharmaceutiques')">
+          <div class="gallery-img-wrap">
+            <img src="assets/screenshots/ges-pharma-dash.png" alt="GES-Pharma Espace de gestion">
+            <div class="gallery-overlay-badge">
+              <strong>GES-Pharma — Espace Gestion</strong>
+              <span>DASHBOARD</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 4: GES-Pharma Search Portal -->
+        <div class="gallery-item-card" onclick="openImageModal('assets/screenshots/ges-pharma-search.png', 'GES-Pharma Mali — Portail de Recherche de Médicaments près de chez vous')">
+          <div class="gallery-img-wrap">
+            <img src="assets/screenshots/ges-pharma-search.png" alt="GES-Pharma Portail Médicaments">
+            <div class="gallery-overlay-badge">
+              <strong>GES-Pharma — Recherche Médicaments</strong>
+              <span>PORTAIL MALI</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 5: Maiga Consulting Site (WordPress) -->
+        <div class="gallery-item-card" onclick="openImageModal('assets/screenshots/mg-consul.png', 'Maiga Consulting — Site Officiel (développé sous WordPress)')">
+          <div class="gallery-img-wrap">
+            <img src="assets/screenshots/mg-consul.png" alt="Maiga Consulting WordPress">
+            <div class="gallery-overlay-badge">
+              <strong>Maiga Consulting (mg-consulting.site)</strong>
+              <span>WORDPRESS</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 6: Station Radio Dashboard 1 -->
+        <div class="gallery-item-card" onclick="openImageModal('assets/screenshots/Station1.png', 'Gestion de Station Radio — Dashboard Antenne & Direct')">
+          <div class="gallery-img-wrap">
+            <img src="assets/screenshots/Station1.png" alt="Gestion de Station Radio">
+            <div class="gallery-overlay-badge">
+              <strong>Station Radio — Tableaux de Bord</strong>
+              <span>MULTI-TENANT</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  `).join('');
-  // Re-observe new cards
-  observeAll();
-}
+  </section>
 
-/* ===== FILTER ===== */
-document.querySelectorAll('#filterBtns button').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('#filterBtns button').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    renderProjects(btn.dataset.f);
-  });
-});
+  <!-- EXPERIENCE & CAREER QUEST STAGES -->
+  <section id="experience">
+    <div class="container">
+      <div class="sec-header">
+        <span class="sec-subtitle">// PARCOURS &amp; ÉTAPES DÉBLOQUÉES</span>
+        <h2 class="sec-title">Expérience &amp; <span>Formations</span></h2>
+        <div class="cyber-line-divider"></div>
+      </div>
 
-/* ===== INTERSECTION OBSERVER (scroll animations) ===== */
-function observeAll() {
-  const els = document.querySelectorAll('.fade-up:not(.visible)');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
+      <div class="stages-grid">
+        <div class="stage-card" onclick="triggerAchievement('Orange Digital Center ML Completed!', 2000)">
+          <div class="stage-header">
+            <span class="stage-num">IA &amp; ML STAGE</span>
+            <span class="stage-xp">+2,000 XP</span>
+          </div>
+          <h3>Machine Learning Initiation</h3>
+          <div class="stage-company">Orange Digital Center</div>
+          <p style="font-size:0.88rem; color:var(--text-muted);">Création &amp; entraînement de modèles IA, algorithmes de prédiction et échange avec la communauté.</p>
+        </div>
+
+        <div class="stage-card" onclick="triggerAchievement('Africant Dev Guild Completed!', 5000)">
+          <div class="stage-header">
+            <span class="stage-num">STAGE 04 [MAX]</span>
+            <span class="stage-xp">+5,000 XP</span>
+          </div>
+          <h3>Développeur Full Stack &amp; Mobile</h3>
+          <div class="stage-company">Africant Development (ACI 2000)</div>
+          <p style="font-size:0.88rem; color:var(--text-muted);">Développement Angular, Ionic, Symfony &amp; Laravel. Sécurité des systèmes &amp; transformation digitale.</p>
+        </div>
+
+        <div class="stage-card" onclick="triggerAchievement('Wagadou Soft Quest Completed!', 3500)">
+          <div class="stage-header">
+            <span class="stage-num">STAGE 03</span>
+            <span class="stage-xp">+3,500 XP</span>
+          </div>
+          <h3>Développeur Web &amp; Admin Réseau</h3>
+          <div class="stage-company">Wagadou Soft</div>
+          <p style="font-size:0.88rem; color:var(--text-muted);">Développement PHP, Laravel, WordPress &amp; gestion des serveurs informatiques.</p>
+        </div>
+
+        <div class="stage-card" onclick="triggerAchievement('ERPIE Academy Completed!', 1500)">
+          <div class="stage-header">
+            <span class="stage-num">STAGE 01</span>
+            <span class="stage-xp">+1,500 XP</span>
+          </div>
+          <h3>Licence Informatique &amp; Télécoms</h3>
+          <div class="stage-company">Université ERPIE — Bamako</div>
+          <p style="font-size:0.88rem; color:var(--text-muted);">Spécialisation génie logiciel, réseaux informatiques &amp; bases de données.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS ARCADE VAULT WITH REAL SCREENSHOTS -->
+  <section id="projects">
+    <div class="container">
+      <div class="sec-header">
+        <span class="sec-subtitle">// ARSENAL PROJETS &amp; SOLUTIONS MAIGA CONSULTING</span>
+        <h2 class="sec-title">Projets Réels &amp; <span>Aperçu de Captures</span></h2>
+        <div class="cyber-line-divider"></div>
+      </div>
+
+      <div class="proj-filters">
+        <button class="proj-btn active" onclick="filterProjects('all', this)">TOUS LES PROJETS</button>
+        <button class="proj-btn" onclick="filterProjects('gestion', this)">LOGICIELS DE GESTION</button>
+        <button class="proj-btn" onclick="filterProjects('web', this)">WEB &amp; SITES</button>
+        <button class="proj-btn" onclick="filterProjects('app', this)">APPLICATIONS AVANCÉES</button>
+      </div>
+
+      <div class="proj-grid" id="projectsContainer"></div>
+    </div>
+  </section>
+
+  <!-- MODAL LIGHTBOX FOR PROJECT DETAILS & SCREENSHOTS -->
+  <div class="modal-backdrop" id="projectModal" onclick="if(event.target === this) closeModal()">
+    <div class="modal-box">
+      <button class="modal-close" onclick="closeModal()" title="Fermer le viseur [ESC]">
+        <i class="fas fa-times"></i>
+      </button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+  <!-- WELCOME ENTRY QUIZ MODAL (POINTS & DIRECT QUESTION UNLOCK) -->
+  <div class="modal-backdrop" id="welcomeChallengeModal">
+    <div class="modal-box" style="max-width:700px; border-color:var(--gold); box-shadow:0 0 55px var(--gold-glow);">
+      <button class="modal-close" onclick="closeWelcomeModal()" title="Ignorer et visiter directement le portfolio">
+        <i class="fas fa-times"></i>
+      </button>
+
+      <div id="welcomeModalBody">
+        <div style="text-align:center; margin-bottom:20px;">
+          <div style="display:inline-flex; align-items:center; gap:8px; background:rgba(255,200,0,0.15); border:1px solid var(--gold); color:var(--gold); padding:6px 16px; border-radius:20px; font-family:var(--font-pixel); font-size:0.75rem; margin-bottom:12px;">
+            <i class="fas fa-gamepad"></i> TECH &amp; IA QUIZ · GAGNEZ DES POINTS
+          </div>
+          <h3 style="font-family:var(--font-head); font-size:1.5rem; color:#fff; margin-bottom:8px;">
+            Quiz Développement &amp; <span style="color:var(--gold);">Intelligence Artificielle</span> 🤖
+          </h3>
+          <p style="color:var(--text-muted); font-size:0.9rem; max-width:550px; margin:0 auto; line-height:1.6;">
+            Testez vos connaissances en développement logiciel &amp; en IA ! Chaque bonne réponse vous donne des points XP pour poser directement vos questions projet à <strong>Amadou Maiga</strong>. Vous pouvez ignorer à tout moment.
+          </p>
+        </div>
+
+        <div id="welcomeQuizStepContent">
+          <!-- Dynamically populated by JS -->
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:20px; border-top:1px solid rgba(255,255,255,0.1); padding-top:14px;">
+          <button onclick="closeWelcomeModal()" style="background:none; border:none; color:var(--text-muted); cursor:pointer; font-size:0.85rem; text-decoration:underline; font-family:var(--font-body);">
+            <i class="fas fa-forward"></i> Ignorer &amp; visiter directement le portfolio
+          </button>
+          <span id="welcomeQuizStepIndicator" style="font-family:var(--font-pixel); color:var(--cyan); font-size:0.75rem;">QUESTION 1 / 5</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING CTA FOR ASKING QUESTIONS WITH EARNED POINTS -->
+  <button onclick="openWelcomeModal()" style="position:fixed; bottom:24px; right:24px; z-index:1900; background:linear-gradient(135deg, var(--gold), #ffaa00); color:#000; font-family:var(--font-head); font-weight:800; font-size:0.85rem; border:none; padding:12px 20px; border-radius:30px; box-shadow:0 0 25px var(--gold-glow); cursor:pointer; display:flex; align-items:center; gap:8px;" title="Répondez au quiz et gagnez des points pour poser votre question !">
+    <i class="fas fa-comments"></i> Poser une Question (Points Gagnés)
+  </button>
+
+  <!-- CONTACT & FOOTER -->
+  <section id="contact">
+    <div class="container">
+      <div class="sec-header">
+        <span class="sec-subtitle">// PRENDRE CONTACT</span>
+        <h2 class="sec-title">Collaborons sur <span>votre projet</span></h2>
+        <div class="cyber-line-divider"></div>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-card">
+          <h3 style="font-family:var(--font-head); font-size:1.5rem; margin-bottom:16px;">Amadou Maiga</h3>
+          <p style="color:var(--text-muted); margin-bottom:24px;">Développeur Full Stack &amp; Fondateur de Maiga Consulting. Spécialiste Spring Boot, Angular, Laravel, Ionic, React. Disponible pour vos projets.</p>
+
+          <div style="margin-bottom:14px; font-weight:700; color:var(--gold);">
+            <i class="fas fa-globe"></i> Site Web : <a href="https://mg-consulting.site" target="_blank" style="color:var(--cyan);">https://mg-consulting.site</a>
+          </div>
+          <div style="margin-bottom:14px; font-weight:700; color:var(--gold);">
+            <i class="fas fa-envelope"></i> Email : <a href="mailto:doumaiga3@gmail.com" style="color:var(--cyan);">doumaiga3@gmail.com</a>
+          </div>
+          <div style="margin-bottom:14px; font-weight:700; color:var(--gold);">
+            <i class="fab fa-whatsapp"></i> WhatsApp : <a href="https://wa.me/22353417919" target="_blank" style="color:var(--neon-green);">+223 53 41 79 19</a>
+          </div>
+          <div style="margin-bottom:14px; font-weight:700; color:var(--gold);">
+            <i class="fab fa-linkedin"></i> LinkedIn : <a href="https://www.linkedin.com/" target="_blank" style="color:var(--cyan);">Mon profil LinkedIn</a>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <form onsubmit="event.preventDefault(); triggerAchievement('Message Transmis !', 1000); alert('Votre message a été transmis avec succès !');">
+            <input type="text" placeholder="Votre nom complet" required style="width:100%; padding:14px; background:rgba(0,0,0,0.6); border:1px solid var(--border-color); color:#fff; border-radius:10px; margin-bottom:12px;">
+            <input type="email" placeholder="Votre adresse email" required style="width:100%; padding:14px; background:rgba(0,0,0,0.6); border:1px solid var(--border-color); color:#fff; border-radius:10px; margin-bottom:12px;">
+            <textarea placeholder="Décrivez votre besoin..." rows="4" required style="width:100%; padding:14px; background:rgba(0,0,0,0.6); border:1px solid var(--border-color); color:#fff; border-radius:10px; margin-bottom:16px;"></textarea>
+            <button type="submit" class="btn-cyber-gold" style="width:100%; justify-content:center;">
+              <i class="fas fa-paper-plane"></i> Envoyer le Message (+1000 XP)
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>© 2026 <strong>Amadou Maiga</strong> · Développeur Full Stack &amp; Fondateur de <a href="https://mg-consulting.site" target="_blank" style="color:var(--gold);">Maiga Consulting</a> · Bamako, Mali</p>
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    /* ===== 1. CANVAS ENGINE ===== */
+    const canvas = document.getElementById('cyberCanvas');
+    const ctx = canvas.getContext('2d');
+    let width, height, particles = [];
+
+    function initCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      particles = [];
+      for(let i=0; i<60; i++) {
+        particles.push({
+          x: Math.random()*width, y: Math.random()*height,
+          vx: (Math.random()-0.5)*0.8, vy: (Math.random()-0.5)*0.8,
+          radius: Math.random()*2+1, color: Math.random()>0.5 ? '#FFB800' : '#00F0FF'
+        });
+      }
+    }
+
+    function animateCanvas() {
+      ctx.clearRect(0,0,width,height);
+      particles.forEach(p => {
+        p.x += p.vx; p.y += p.vy;
+        if(p.x<0 || p.x>width) p.vx*=-1;
+        if(p.y<0 || p.y>height) p.vy*=-1;
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.radius, 0, Math.PI*2);
+        ctx.fillStyle = p.color; ctx.fill();
+      });
+      requestAnimationFrame(animateCanvas);
+    }
+    initCanvas(); animateCanvas();
+
+    window.addEventListener('mousemove', e => {
+      const glow = document.getElementById('cursorGlow');
+      if(glow) { glow.style.left = e.clientX+'px'; glow.style.top = e.clientY+'px'; }
+    });
+
+    /* ===== 2. GAMIFICATION STATE ===== */
+    let currentXp = 19500; const maxXp = 20000;
+    let unlockedTrophies = 5;
+
+    function addXp(amount) {
+      currentXp = Math.min(maxXp, currentXp + amount);
+      document.getElementById('xpVal').textContent = currentXp.toLocaleString();
+      document.getElementById('xpBarFill').style.width = ((currentXp / maxXp) * 100) + '%';
+    }
+
+    function triggerAchievement(title, xpBonus) {
+      addXp(xpBonus);
+      unlockedTrophies = Math.min(5, unlockedTrophies + 1);
+      document.getElementById('trophyCount').textContent = `${unlockedTrophies} / 5 UNLOCKED`;
+      const toast = document.getElementById('achievementToast');
+      document.getElementById('toastTitle').textContent = `${title} (+${xpBonus} XP)`;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3500);
+    }
+
+    /* ===== 3. TYPING EFFECT ===== */
+    const phrases = [
+      "Développeur Full Stack (Spring Boot & Angular)",
+      "Ingénieur Logiciel & Architecte Web",
+      "Fondateur de Maiga Consulting",
+      "Créateur de Ges Boutique (GESLAFIA)",
+      "Créateur de GES-Pharma & Solutions Métiers",
+      "Développeur Mobile (Ionic & React Native)",
+      "Initiation Machine Learning & IA"
+    ];
+    let pIdx = 0, cIdx = 0, isDel = false;
+    function typeLoop() {
+      const cur = phrases[pIdx];
+      cIdx += isDel ? -1 : 1;
+      document.getElementById('typingText').textContent = cur.substring(0, cIdx);
+      let speed = isDel ? 30 : 65;
+      if(!isDel && cIdx === cur.length) { speed = 2000; isDel = true; }
+      else if(isDel && cIdx === 0) { isDel = false; pIdx = (pIdx+1)%phrases.length; speed = 400; }
+      setTimeout(typeLoop, speed);
+    }
+    typeLoop();
+
+    /* ===== 4. TECH QUIZ ENGINE ===== */
+    const quizData = [
+      {
+        q: "C'est quoi exactement HTML dans le développement Web ?",
+        options: [
+          "Un langage de balisage servant à structurer le contenu d'une page Web",
+          "Une base de données relationnelle sécurisée",
+          "Un système d'exploitation pour serveurs Linux"
+        ],
+        correct: 0,
+        exp: "Exact ! HTML (HyperText Markup Language) définit la structure de base (titres, paragraphes, images, formulaires) de n'importe quel site ou application Web."
+      },
+      {
+        q: "C'est quoi une API REST et à quoi ça sert ?",
+        options: [
+          "Un antivirus qui protège les ordinateurs",
+          "Une interface qui permet à deux applications (ex: Frontend & Backend) de communiquer et échanger des données",
+          "Un format de fichier d'image haute définition"
+        ],
+        correct: 1,
+        exp: "Bravo ! Une API REST (Representational State Transfer) permet par exemple à une application Angular ou mobile de demander des données à un serveur Spring Boot ou Laravel."
+      },
+      {
+        q: "À quoi sert le framework Spring Boot (Java) ?",
+        options: [
+          "À créer des graphiques 3D pour jeux vidéo",
+          "À créer rapidement des applications et API backend d'entreprise robustes, sécurisées et évolutives",
+          "À éditer des vidéos pour YouTube"
+        ],
+        correct: 1,
+        exp: "Super ! Spring Boot est un framework majeur en Java utilisé par Amadou Maiga pour développer des architectures de microservices et API sécurisées."
+      },
+      {
+        q: "C'est quoi le Machine Learning (Apprentissage Automatique) ?",
+        options: [
+          "Un câble réseau à très haute vitesse",
+          "Une branche de l'IA qui permet aux ordinateurs d'apprendre et de faire des prédictions à partir de données",
+          "Un outil de nettoyage de disque dur"
+        ],
+        correct: 1,
+        exp: "Exactement ! Amadou Maiga s'est formé au Machine Learning chez Orange Digital Center pour créer des modèles intelligents autonomes."
+      },
+      {
+        q: "Quelle est la mission principale de Maiga Consulting ?",
+        options: [
+          "Accompagner les entreprises dans leur transformation numérique avec des solutions web, mobiles et de gestion sur mesure",
+          "Vendre du matériel de bureau et des fournitures de papeterie",
+          "Organiser des voyages touristiques"
+        ],
+        correct: 0,
+        exp: "Excellente réponse ! Maiga Consulting (mg-consulting.site) conçoit des solutions technologiques innovantes pour booster les entreprises en Afrique !"
+      }
+    ];
+
+    let currentQuizIdx = 0;
+    let quizScoreXp = 0;
+
+    function renderQuizQuestion() {
+      const q = quizData[currentQuizIdx];
+      document.getElementById('quizStepTag').textContent = `QUESTION ${currentQuizIdx + 1} / ${quizData.length}`;
+      document.getElementById('quizQuestion').textContent = q.q;
+      document.getElementById('quizExplanation').style.display = 'none';
+      document.getElementById('quizNextBtn').style.display = 'none';
+
+      const optionsDiv = document.getElementById('quizOptions');
+      const letters = ['A', 'B', 'C'];
+      optionsDiv.innerHTML = q.options.map((opt, i) => `
+        <button class="quiz-opt-btn" onclick="checkQuizAnswer(${i})">
+          <div class="quiz-opt-letter">${letters[i]}</div>
+          <div>${opt}</div>
+        </button>
+      `).join('');
+    }
+
+    function checkQuizAnswer(selectedIdx) {
+      const q = quizData[currentQuizIdx];
+      const buttons = document.querySelectorAll('.quiz-opt-btn');
+      buttons.forEach(b => b.style.pointerEvents = 'none');
+
+      if(selectedIdx === q.correct) {
+        buttons[selectedIdx].classList.add('correct');
+        quizScoreXp += 500;
+        document.getElementById('quizScore').textContent = quizScoreXp;
+        triggerAchievement(`Bonne réponse ! (+500 XP)`, 500);
+      } else {
+        buttons[selectedIdx].classList.add('wrong');
+        buttons[q.correct].classList.add('correct');
+      }
+
+      const expBox = document.getElementById('quizExplanation');
+      expBox.innerHTML = `<strong>💡 Explication :</strong> ${q.exp}`;
+      expBox.style.display = 'block';
+      document.getElementById('quizNextBtn').style.display = 'inline-flex';
+    }
+
+    function nextQuestion() {
+      currentQuizIdx++;
+      if(currentQuizIdx < quizData.length) {
+        renderQuizQuestion();
+      } else {
+        document.getElementById('quizQuestion').textContent = `🎉 Bravo ! Vous avez terminé le Cyber Quiz avec un score de ${quizScoreXp} XP !`;
+        document.getElementById('quizOptions').innerHTML = `
+          <div style="text-align:center; padding:20px;">
+            <p style="font-size:1.1rem; color:var(--gold); margin-bottom:16px;">Vous maîtrisez maintenant les bases du développement Web, des API REST et de l'IA !</p>
+            <button class="btn-cyber-gold" onclick="currentQuizIdx=0; quizScoreXp=0; document.getElementById('quizScore').textContent=0; renderQuizQuestion();">
+              <i class="fas fa-rotate-right"></i> Rejouer le Quiz
+            </button>
+          </div>
+        `;
+        document.getElementById('quizExplanation').style.display = 'none';
+        document.getElementById('quizNextBtn').style.display = 'none';
+      }
+    }
+
+    renderQuizQuestion();
+
+    /* ===== 5. PROJECTS DATA WITH REAL SCREENSHOTS & ICONS ===== */
+    const projectsList = [
+      {
+        id: "ges-boutique",
+        name: "Ges Boutique / GESLAFIA (Web & Mobile)",
+        cat: "gestion",
+        rarity: "legendary",
+        rarityLabel: "SOLUTION FULL STACK MAIGA CONSULTING",
+        hasImg: true,
+        img: "assets/screenshots/ges-boutique-login.png",
+        gallery: [
+          "assets/screenshots/ges-boutique-login.png",
+          "assets/screenshots/ges-boutique-ventes.png",
+          "assets/screenshots/ges-boutique-stock.png",
+          "assets/screenshots/ges-boutique-facture.png"
+        ],
+        desc: "Ges Boutique (GESLAFIA) — Le carnet de votre boutique, maintenant numérique. Solution Web & App Mobile : suivi du chiffre d'affaires, valeur du stock, ventes comptant/crédit et factures imprimables avec QR Code.",
+        tags: ["Spring Boot", "Angular", "Ionic", "MySQL"]
+      },
+      {
+        id: "pharmacie",
+        name: "GES-Pharma — Gestion de Pharmacies",
+        cat: "gestion",
+        rarity: "legendary",
+        rarityLabel: "GES-PHARMA MALI",
+        hasImg: true,
+        img: "assets/screenshots/ges-pharma-dash.png",
+        gallery: [
+          "assets/screenshots/ges-pharma-dash.png",
+          "assets/screenshots/ges-pharma-search.png"
+        ],
+        desc: "Solution complète GES-Pharma (Portail de recherche de médicaments près de chez vous & Espace de gestion). Suivi de valeur de stock, alertes péremption, caisse et paiements mobiles.",
+        tags: ["Spring Boot", "Angular", "MySQL", "REST API"]
+      },
+      {
+        id: "mg-consulting",
+        name: "Plateforme Maiga Consulting",
+        cat: "web",
+        rarity: "legendary",
+        rarityLabel: "SITE OFFICIEL MAIGA CONSULTING",
+        hasImg: true,
+        img: "assets/screenshots/mg-consul.png",
+        gallery: ["assets/screenshots/mg-consul.png", "assets/screenshots/mg-col1.png"],
+        desc: "Site vitrine officiel de Maiga Consulting (https://mg-consulting.site), conçu sous WordPress pour présenter les prestations de l'entreprise, demandes de devis et offres de transformation digitale.",
+        tags: ["Site Vitrine", "WordPress", "Solutions Digitales"]
+      },
+      {
+        id: "radio",
+        name: "Gestion de Station Radio",
+        cat: "app",
+        rarity: "legendary",
+        rarityLabel: "MULTI-TENANT MEDIA SUITE",
+        hasImg: true,
+        img: "assets/screenshots/Station1.png",
+        gallery: [
+          "assets/screenshots/Station1.png",
+          "assets/screenshots/Station2.png",
+          "assets/screenshots/Station3.png",
+          "assets/screenshots/Station4.png"
+        ],
+        desc: "Application métier complète de gestion d'antenne de station radio avec tableaux de bord analytiques, gestion des grilles de programmes et rôles utilisateurs multi-tenant.",
+        tags: ["Spring Boot", "Angular", "MySQL", "REST API"]
+      },
+      {
+        id: "ecole",
+        name: "Gestion d'Établissement Scolaire",
+        cat: "gestion",
+        rarity: "legendary",
+        rarityLabel: "SOLUTION ÉDUCATION",
+        hasImg: true,
+        img: "assets/screenshots/Capture d'écran 2026-09-21 135748.png",
+        gallery: ["assets/screenshots/Capture d'écran 2026-09-21 135748.png"],
+        desc: "Gestion informatisée des établissements scolaires : élèves, notes, bulletins automatisés, emplois du temps et messagerie parents.",
+        tags: ["Laravel", "Angular", "MySQL"]
+      },
+      {
+        id: "pressing",
+        name: "Gestion de Pressing",
+        cat: "gestion",
+        rarity: "epic",
+        rarityLabel: "APPLICATION PRESSING",
+        hasImg: false,
+        icon: "fas fa-shirt",
+        gallery: [],
+        desc: "Solution métier de gestion de pressing : suivi des commandes, dépôts d'articles, repassage, retours et suivi des paiements.",
+        tags: ["Laravel", "Angular", "MySQL"]
+      }
+    ];
+
+    function renderProjects(filter = "all") {
+      const container = document.getElementById('projectsContainer');
+      const filtered = filter === "all" ? projectsList : projectsList.filter(p => p.cat === filter);
+
+      container.innerHTML = filtered.map(p => `
+        <div class="proj-card" onclick="openModal('${p.id}')">
+          ${p.hasImg ? `
+            <div class="proj-banner-img">
+              <span class="rarity-pill ${p.rarity}">${p.rarityLabel}</span>
+              <img src="${p.img}" alt="${p.name}">
+            </div>
+          ` : `
+            <div class="proj-banner-icon">
+              <span class="rarity-pill ${p.rarity}">${p.rarityLabel}</span>
+              <i class="${p.icon}"></i>
+            </div>
+          `}
+          <div class="proj-body">
+            <h3>${p.name}</h3>
+            <p>${p.desc}</p>
+            <div class="proj-tags">
+              ${p.tags.map(t => `<span class="proj-tag">${t}</span>`).join('')}
+            </div>
+            <button class="proj-inspect-btn">
+              <i class="fas fa-gamepad"></i> Découvrir les détails &amp; démo
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function filterProjects(cat, btn) {
+      document.querySelectorAll('.proj-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderProjects(cat);
+    }
+
+    let currentGallery = [];
+    let currentGalleryIdx = 0;
+    let activeProjectId = null;
+
+    function openModal(id) {
+      const p = projectsList.find(x => x.id === id);
+      if(!p) return;
+
+      activeProjectId = id;
+      currentGallery = p.hasImg ? (p.gallery && p.gallery.length > 0 ? p.gallery : [p.img]) : [];
+      currentGalleryIdx = 0;
+
+      triggerAchievement(`Détails consultés : ${p.name}`, 500);
+      renderModalBody(p);
+
+      document.getElementById('projectModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function renderModalBody(p) {
+      const hasGallery = currentGallery.length > 0;
+      let galleryMarkup = '';
+
+      if (hasGallery) {
+        const curImg = currentGallery[currentGalleryIdx];
+        const showNav = currentGallery.length > 1;
+
+        galleryMarkup = `
+          <div style="margin-bottom:20px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+              <span style="font-size:0.85rem; color:var(--gold); font-family:var(--font-head); display:flex; align-items:center; gap:8px;">
+                <i class="fas fa-camera"></i> EXEMPLE DE CAPTURE RÉELLE (${currentGalleryIdx + 1} / ${currentGallery.length})
+              </span>
+              <span style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-pixel);">[CLIQUEZ OU FLÈCHES POUR NAVIGUER]</span>
+            </div>
+
+            <div class="lightbox-hero">
+              <img id="lightboxMainImg" src="${curImg}" alt="${p.name}">
+              ${showNav ? `
+                <button class="lightbox-nav-btn lightbox-nav-prev" onclick="navGallery(-1)" title="Image Précédente [←]">
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="lightbox-nav-btn lightbox-nav-next" onclick="navGallery(1)" title="Image Suivante [→]">
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+              ` : ''}
+            </div>
+
+            ${showNav ? `
+              <div class="lightbox-thumbs">
+                ${currentGallery.map((imgSrc, idx) => `
+                  <div class="lightbox-thumb ${idx === currentGalleryIdx ? 'active' : ''}" onclick="selectGalleryImg(${idx})">
+                    <img src="${imgSrc}" alt="Miniature ${idx + 1}">
+                  </div>
+                `).join('')}
+              </div>
+            ` : ''}
+          </div>
+        `;
+      }
+
+      const box = document.getElementById('modalContent');
+      box.innerHTML = `
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:20px; border-bottom:1px solid rgba(0,243,255,0.2); padding-bottom:16px;">
+          <div style="display:flex; align-items:center; gap:16px;">
+            <div style="width:52px; height:52px; background:linear-gradient(135deg, var(--gold), #ffaa00); border-radius:12px; display:flex; align-items:center; justify-content:center; color:#000; font-size:1.5rem; box-shadow:0 0 20px var(--gold-glow); flex-shrink:0;">
+              <i class="${p.hasImg ? 'fas fa-laptop-code' : p.icon}"></i>
+            </div>
+            <div>
+              <h3 style="font-family:var(--font-head); font-size:1.4rem; color:#fff; margin-bottom:4px;">${p.name}</h3>
+              <span style="color:var(--cyan); font-family:var(--font-pixel); font-size:0.75rem; letter-spacing:1px;">
+                ${p.rarityLabel || 'SOLUTION AMADOU MAIGA'}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-bottom:20px;">
+          <h4 style="color:var(--gold); font-size:0.9rem; margin-bottom:6px; font-family:var(--font-head);"><i class="fas fa-info-circle"></i> Présentation du Projet :</h4>
+          <p style="color:var(--text-muted); line-height:1.7; font-size:0.95rem;">${p.desc}</p>
+        </div>
+
+        ${galleryMarkup}
+
+        <div style="background:rgba(0,0,0,0.5); padding:16px; border-radius:12px; border:1px solid rgba(0,243,255,0.2); margin-bottom:24px;">
+          <h4 style="color:var(--cyan); font-size:0.85rem; margin-bottom:10px; font-family:var(--font-head);"><i class="fas fa-layer-group"></i> Technologies &amp; Architecture :</h4>
+          <div style="display:flex; gap:8px; flex-wrap:wrap;">
+            ${p.tags.map(t => `<span style="background:rgba(0,243,255,0.1); border:1px solid rgba(0,243,255,0.3); padding:5px 12px; border-radius:20px; font-size:0.8rem; color:#fff; font-weight:600;">${t}</span>`).join('')}
+          </div>
+        </div>
+
+        <div style="display:flex; gap:12px; flex-wrap:wrap;">
+          <a href="https://wa.me/22353417919?text=${encodeURIComponent('Bonjour Amadou, je souhaite une démonstration du projet: '+p.name)}" target="_blank" class="btn-cyber-gold" style="flex:1; min-width:260px; justify-content:center;">
+            <i class="fab fa-whatsapp"></i> Demander une démonstration WhatsApp
+          </a>
+          <button onclick="closeModal()" class="btn-cyber-cyan" style="background:rgba(255,50,50,0.15); border-color:rgba(255,100,100,0.4); color:#ff6b6b;">
+            <i class="fas fa-times-circle"></i> Fermer [ESC]
+          </button>
+        </div>
+      `;
+    }
+
+    function selectGalleryImg(idx) {
+      currentGalleryIdx = idx;
+      if (activeProjectId) {
+        const p = projectsList.find(x => x.id === activeProjectId);
+        if (p) renderModalBody(p);
+      }
+    }
+
+    function navGallery(dir) {
+      if (currentGallery.length <= 1) return;
+      currentGalleryIdx = (currentGalleryIdx + dir + currentGallery.length) % currentGallery.length;
+      if (activeProjectId) {
+        const p = projectsList.find(x => x.id === activeProjectId);
+        if (p) renderModalBody(p);
+      }
+    }
+
+    function openImageModal(imgSrc, title) {
+      triggerAchievement(`Aperçu Image`, 300);
+      activeProjectId = null;
+      currentGallery = [imgSrc];
+      currentGalleryIdx = 0;
+
+      const box = document.getElementById('modalContent');
+      box.innerHTML = `
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; border-bottom:1px solid rgba(0,243,255,0.2); padding-bottom:12px;">
+          <h3 style="font-family:var(--font-head); font-size:1.3rem; color:var(--gold); display:flex; align-items:center; gap:8px;">
+            <i class="fas fa-image"></i> ${title}
+          </h3>
+        </div>
+
+        <div class="lightbox-hero" style="margin-bottom:20px;">
+          <img src="${imgSrc}" alt="${title}" style="width:100%; max-height:650px; object-fit:contain; display:block;">
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:12px;">
+          <button onclick="closeModal()" class="btn-cyber-gold">
+            <i class="fas fa-times-circle"></i> Quitter la vue [ESC]
+          </button>
+        </div>
+      `;
+      document.getElementById('projectModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('projectModal').classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    window.addEventListener('keydown', (e) => {
+      const modal = document.getElementById('projectModal');
+      if (!modal || !modal.classList.contains('active')) return;
+
+      if (e.key === 'Escape') {
+        closeModal();
+      } else if (e.key === 'ArrowLeft' && currentGallery.length > 1) {
+        navGallery(-1);
+      } else if (e.key === 'ArrowRight' && currentGallery.length > 1) {
+        navGallery(1);
       }
     });
-  }, { threshold: 0.12 });
-  els.forEach(el => observer.observe(el));
-}
 
-/* ===== SKILL BARS ===== */
-function animateBars() {
-  const fills = document.querySelectorAll('.skill-bar-fill');
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.style.transform = `scaleX(${e.target.style.getPropertyValue('--w') || 1})`;
-        e.target.classList.add('animated');
-        observer.unobserve(e.target);
+    /* ===== WELCOME ENTRY QUIZ ENGINE & POINTS SYSTEM ===== */
+    const welcomeQuestions = [
+      {
+        q: "🌐 C'est quoi un Framework Backend comme Spring Boot ou Laravel ?",
+        options: [
+          { text: "Un outil qui simplifie la création du côté serveur d'une application : gestion des données, sécurité, APIs et logique métier", correct: true },
+          { text: "Un logiciel pour dessiner des boutons et des menus dans une application", correct: false },
+          { text: "Un câble réseau spécial pour accélérer Internet", correct: false }
+        ]
+      },
+      {
+        q: "🤖 C'est quoi le Machine Learning (Apprentissage Automatique) en Intelligence Artificielle ?",
+        options: [
+          { text: "Une technique qui permet aux machines d'apprendre automatiquement à partir de données sans être explicitement programmées pour chaque tâche", correct: true },
+          { text: "Un programme qui répare les machines à laver automatiquement", correct: false },
+          { text: "Un système qui imprime des leçons de mathématiques sur papier", correct: false }
+        ]
+      },
+      {
+        q: "📱 Quelle est la différence entre une application Web et une application Mobile ?",
+        options: [
+          { text: "Une app Web s'ouvre dans un navigateur (Chrome, Firefox), une app Mobile se télécharge sur un smartphone (Android/iOS) et peut fonctionner sans internet", correct: true },
+          { text: "Une app Web ne fonctionne que sur les imprimantes connectées", correct: false },
+          { text: "Il n'y a aucune différence, c'est exactement la même chose", correct: false }
+        ]
+      },
+      {
+        q: "🔗 C'est quoi une API REST dans le développement web ?",
+        options: [
+          { text: "Une interface de communication qui permet à deux logiciels de s'échanger des données via Internet (ex: une app mobile qui récupère des infos depuis un serveur)", correct: true },
+          { text: "Un outil pour couper le Wi-Fi automatiquement après 10 minutes", correct: false },
+          { text: "Une méthode pour sauvegarder des fichiers sur une clé USB", correct: false }
+        ]
+      },
+      {
+        q: "🧠 Qu'est-ce que le Deep Learning, une branche avancée de l'IA ?",
+        options: [
+          { text: "Un sous-ensemble du Machine Learning qui utilise des réseaux de neurones artificiels inspirés du cerveau humain pour reconnaître des images, voix ou textes", correct: true },
+          { text: "Une méthode pour apprendre à nager en profondeur très rapidement", correct: false },
+          { text: "Un système de rangement automatique des dossiers sur ordinateur", correct: false }
+        ]
       }
-    });
-  }, { threshold: 0.4 });
-  fills.forEach(f => observer.observe(f));
-}
+    ];
 
-/* ===== NAVBAR SCROLL ===== */
-window.addEventListener('scroll', () => {
-  const sections = document.querySelectorAll('section[id]');
-  let cur = '';
-  sections.forEach(s => {
-    if (pageYOffset >= s.offsetTop - 120) cur = s.id;
-  });
-  document.querySelectorAll('.nav-link').forEach(a => {
-    a.classList.toggle('active', a.getAttribute('href') === `#${cur}`);
-  });
-});
+    let welcomeCurrentStep = 0;
+    let welcomeScore = 0;
 
-/* ===== MOBILE MENU ===== */
-document.getElementById('hamburger').addEventListener('click', () => {
-  document.getElementById('navLinks').classList.toggle('open');
-});
-document.querySelectorAll('.nav-link').forEach(a => {
-  a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
-});
+    function checkWelcomeAutoOpen() {
+      if(!localStorage.getItem('welcomeQuizAnswered')) {
+        setTimeout(() => {
+          openWelcomeModal();
+        }, 1200);
+      }
+    }
 
-/* ===== FORM HANDLER ===== */
-function handleSubmit() {
-  const btn = document.querySelector('.contact-form .btn-gold');
-  btn.innerHTML = '<i class="fas fa-check"></i> Message envoyé !';
-  btn.style.background = '#27AE60';
-  setTimeout(() => {
-    btn.innerHTML = 'Envoyer le message <i class="fas fa-paper-plane"></i>';
-    btn.style.background = '';
-  }, 3000);
-}
+    function openWelcomeModal() {
+      welcomeCurrentStep = 0;
+      welcomeScore = 0;
+      renderWelcomeStep();
+      document.getElementById('welcomeChallengeModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
 
-/* ===== INIT ===== */
-renderProjects();
-observeAll();
-animateBars();
+    function closeWelcomeModal() {
+      localStorage.setItem('welcomeQuizAnswered', 'true');
+      document.getElementById('welcomeChallengeModal').classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
 
-// Hero fade on load
-document.querySelector('.hero-content').style.opacity = '0';
-document.querySelector('.hero-content').style.transform = 'translateY(24px)';
-setTimeout(() => {
-  document.querySelector('.hero-content').style.transition = 'opacity 0.9s ease, transform 0.9s ease';
-  document.querySelector('.hero-content').style.opacity = '1';
-  document.querySelector('.hero-content').style.transform = 'translateY(0)';
-}, 200);
-</script>
+    function renderWelcomeStep() {
+      const container = document.getElementById('welcomeQuizStepContent');
+      const indicator = document.getElementById('welcomeQuizStepIndicator');
+
+      if(welcomeCurrentStep >= welcomeQuestions.length) {
+        localStorage.setItem('welcomeQuizAnswered', 'true');
+        const totalXP = welcomeScore * 500;
+        triggerAchievement(`Pass VIP Question Directe Débloqué ! (${totalXP} XP)`, totalXP);
+
+        indicator.textContent = "DÉFI ACCESSIBILITÉ REUSSI !";
+        container.innerHTML = `
+          <div style="background:rgba(255,200,0,0.12); border:2px solid var(--gold); border-radius:14px; padding:24px; text-align:center; box-shadow:0 0 30px var(--gold-glow);">
+            <div style="font-size:2.8rem; margin-bottom:8px;">🏆</div>
+            <h4 style="font-family:var(--font-head); font-size:1.4rem; color:var(--gold); margin-bottom:8px;">
+              Félicitations ! ${welcomeScore} / 3 Bonnes Réponses !
+            </h4>
+            <div style="font-family:var(--font-pixel); font-size:1.1rem; color:var(--cyan); margin-bottom:14px;">
+              +${totalXP} POINTS XP CUMULÉS !
+            </div>
+            <p style="color:var(--text-muted); font-size:0.92rem; line-height:1.6; margin-bottom:20px;">
+              Vos points accumulés vous donnent accès au <strong>Pass VIP Question Directe</strong> ! Vous pouvez dès à présent poser directement votre question projet à <strong>Amadou Maiga</strong> sur WhatsApp.
+            </p>
+            <div style="display:flex; gap:12px; flex-wrap:wrap; justify-content:center;">
+              <a href="https://wa.me/22353417919?text=${encodeURIComponent('Bonjour Amadou, j\'ai réussi le Quiz de Bienvenue sur ton portfolio avec '+totalXP+' XP ! J\'aimerais te poser une question sur mon projet : ')}" target="_blank" onclick="closeWelcomeModal()" class="btn-cyber-gold" style="padding:14px 24px; font-size:0.9rem;">
+                <i class="fab fa-whatsapp"></i> Poser ma question à Amadou sur WhatsApp
+              </a>
+              <button onclick="closeWelcomeModal()" class="btn-cyber-cyan" style="padding:14px 20px;">
+                <i class="fas fa-rocket"></i> Explorer le Portfolio
+              </button>
+            </div>
+          </div>
+        `;
+        return;
+      }
+
+      const qObj = welcomeQuestions[welcomeCurrentStep];
+      indicator.textContent = `QUESTION ${welcomeCurrentStep + 1} / ${welcomeQuestions.length}`;
+
+      container.innerHTML = `
+        <div style="background:rgba(0,243,255,0.05); border:1px solid rgba(0,243,255,0.2); border-radius:14px; padding:20px;">
+          <h4 style="font-family:var(--font-head); font-size:1.1rem; color:#fff; margin-bottom:16px;">
+            <span style="color:var(--gold);">Q${welcomeCurrentStep + 1}:</span> ${qObj.q}
+          </h4>
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            ${qObj.options.map((opt, idx) => `
+              <button onclick="answerWelcomeQuestion(${opt.correct})" style="background:rgba(15,19,31,0.9); border:1.5px solid var(--border-color); color:#fff; padding:12px 16px; border-radius:10px; text-align:left; cursor:pointer; font-size:0.9rem; transition:all 0.2s ease; display:flex; align-items:center; gap:10px;" onmouseover="this.style.borderColor='var(--cyan)'; this.style.transform='translateX(4px)'" onmouseout="this.style.borderColor='var(--border-color)'; this.style.transform='none'">
+                <span style="width:24px; height:24px; border-radius:50%; background:rgba(0,243,255,0.15); border:1px solid var(--cyan); color:var(--cyan); display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:800; flex-shrink:0;">
+                  ${String.fromCharCode(65 + idx)}
+                </span>
+                <span>${opt.text}</span>
+              </button>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function answerWelcomeQuestion(isCorrect) {
+      if(isCorrect) {
+        welcomeScore++;
+      }
+      welcomeCurrentStep++;
+      renderWelcomeStep();
+    }
+
+    /* ===== INIT ===== */
+    renderProjects('all');
+    checkWelcomeAutoOpen();
+  </script>
 </body>
 </html>
